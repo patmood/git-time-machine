@@ -30,11 +30,11 @@ module.exports = {
     // A separate bundle will be generated for each
     // bundle config in the list below
     bundleConfigs: [{
-      entries: './src/javascript/app.js',
+      entries: './src/javascripts/app.js',
       dest: dest,
       outputName: 'app.js'
     }, {
-      entries: './src/javascript/head.js',
+      entries: './src/javascripts/head.js',
       dest: dest,
       outputName: 'head.js'
     }]

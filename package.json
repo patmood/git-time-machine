@@ -8,7 +8,7 @@
   },
   "browser": {
     "underscore": "backbone/node_modules/underscore",
-    "plugin": "./src/javascript/vendor/jquery-plugin.js"
+    "plugin": "./src/javascripts/vendor/jquery-plugin.js"
   },
   "browserify": {
     "transform": [
