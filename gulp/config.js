@@ -1,5 +1,6 @@
-var dest = "./build";
-var src = './src';
+var dest = "./build"
+  , src = './src'
+
 
 module.exports = {
   browserSync: {
@@ -21,6 +22,14 @@ module.exports = {
   markup: {
     src: src + "/htdocs/**",
     dest: dest
+  },
+  stylus: {
+    entry: src + "/stylesheets/app.styl",
+    src: src + "/stylesheets/**",
+    dest: dest,
+    options: {
+      compress: true
+    }
   },
   browserify: {
     // Enable source maps
