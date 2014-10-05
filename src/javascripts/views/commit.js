@@ -17,6 +17,16 @@ module.exports = Backbone.View.extend({
       }
     })
   }
+, events: {
+    'click #prev-commit': 'prevCommit'
+  , 'click #next-commit': 'nextCommit'
+  }
+, prevCommit: function() {
+    console.log('go to previous')
+  }
+, nextCommit: function() {
+    console.log('go to next')
+  }
 , render: function(commit) {
     $(this.el).html(this.template(commit))
   }
