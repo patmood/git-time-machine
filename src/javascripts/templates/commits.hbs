@@ -1,6 +1,8 @@
 <p>This is list of commits</p>
 <ul>
   {{#each models}}
-  <li>{{attributes.sha}}</li>
+  <li>
+    <a id={{attributes.sha}} href="#">{{attributes.commit.author.date}}</a>
+  </li>
   {{/each}}
 </ul>

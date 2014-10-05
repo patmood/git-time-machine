@@ -1,10 +1,12 @@
 var _          = require('underscore')
   , Backbone   = require('backbone')
+
+window.App = {}
 Backbone.$ = require('jquery')
 
 var Router = require('./router')
 
-var router = new Router()
+window.App.router = new Router()
 
 
 Backbone.history.start()
