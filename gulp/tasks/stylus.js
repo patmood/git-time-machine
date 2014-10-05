@@ -3,7 +3,6 @@ var gulp  = require('gulp')
   , stylus= require('gulp-stylus')
 
 gulp.task('stylus', function() {
-  console.log(config)
   gulp.src(config.entry)
     .pipe(stylus(config.options))
     .pipe(gulp.dest(config.dest))
