@@ -9,9 +9,6 @@ module.exports = Backbone.Collection.extend({
 , initialize: function(models, opts) {
     this.owner = opts.owner
     this.repo = opts.repo
-}
-, sync: function(method, model, options) {
-    return $.getJSON(this.url(), options.success)
   }
 , url: function() {
     return [

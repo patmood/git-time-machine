@@ -26,8 +26,10 @@ module.exports = Backbone.View.extend({
     var commit = _.find(this.model.models, function(commit) {
       return commit.attributes.sha === sha
     })
+    // TODO: if the specific commit is not in the collection, fetch it
+    if (!commit) console.error('No commit found!')
     window.App.router.navigate( commit.get('url').match(/(repos.+)/gi)[0] )
-    new CommitView({ model: commit }).render()
+    new CommitView({ model: commit })
   }
 })
 
