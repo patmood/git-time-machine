@@ -2,6 +2,10 @@ var _          = require('underscore')
   , Backbone   = require('backbone')
 Backbone.$ = require('jquery')
 
+// MODELS
+var Commit = require('./models/commit')
+
+// VIEWS
 var IndexView = require('./views/index_view')
 var UserView = require('./views/user')
 var UsersView = require('./views/users')
@@ -26,11 +30,15 @@ module.exports = Backbone.Router.extend({
     new UserView({ username: username })
   }
 , commit: function(owner, repo, sha) {
-    // Surely this can be refactored
-    new CommitView({
+    var commit = new Commit({
       owner: owner
     , repo: repo
     , sha: sha
+    })
+    commit.fetch({
+      success: function(commit) {
+        new CommitView({ model: commit }).render()
+      }
     })
   }
 , commits: function(owner, repo, sha) {
