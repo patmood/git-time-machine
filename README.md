@@ -1,4 +1,4 @@
-Github Time Machine
+Git Time Machine
 =================
 
 Time machine for Github files
