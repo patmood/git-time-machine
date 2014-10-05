@@ -10,8 +10,7 @@ module.exports = Backbone.View.extend({
 , template: require('../templates/user')
 , initialize: function(opts) {
     var _this = this
-    this.username = opts.username
-    var user = new User(opts)
+     , user = new User(opts)
     user.fetch({
       success: function(user) {
         _this.render(user.attributes)

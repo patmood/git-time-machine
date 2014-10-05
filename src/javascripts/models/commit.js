@@ -8,7 +8,14 @@ module.exports = Backbone.Model.extend({
     return $.getJSON(this.url(), options.success)
   }
 , url: function() {
-    return 'https://api.github.com/users/' + this.get('username')
+    return [
+      'https://api.github.com/repos'
+    , this.get('owner')
+    , this.get('repo')
+    , 'commits'
+    , this.get('sha')
+    ].join('/')
   }
 })
+
 
