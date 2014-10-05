@@ -13,7 +13,7 @@ module.exports = Backbone.View.extend({
       , commit = new Commit(opts)
     commit.fetch({
       success: function(commit) {
-        _this.render(commit.attributes)
+        _this.render(commit)
       }
     })
   }

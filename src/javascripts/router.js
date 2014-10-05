@@ -6,13 +6,15 @@ var IndexView = require('./views/index_view')
 var UserView = require('./views/user')
 var UsersView = require('./views/users')
 var CommitView = require('./views/commit')
+var CommitsView = require('./views/commits')
 
 module.exports = Backbone.Router.extend({
   routes: {
     '': 'index'
-  , 'users/:username': 'user'
-  , 'users': 'users'
-  , 'repos/:owner/:repo/commits/:sha': 'commit'
+  , 'users/:username(/)': 'user'
+  , 'users(/)': 'users'
+  , 'repos/:owner/:repo/commits/:sha(/)': 'commit'
+  , 'repos/:owner/:repo/commits(/)': 'commits'
   }
 , index: function() {
     new IndexView({ el: '#content' })
@@ -29,6 +31,12 @@ module.exports = Backbone.Router.extend({
       owner: owner
     , repo: repo
     , sha: sha
+    })
+  }
+, commits: function(owner, repo, sha) {
+    new CommitsView({
+      owner: owner
+    , repo: repo
     })
   }
 })
