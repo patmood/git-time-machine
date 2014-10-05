@@ -4,6 +4,7 @@ Backbone.$ = require('jquery')
 
 // MODELS
 var Commit = require('./models/commit')
+var CommitsList = require('./models/commits_collection')
 
 // VIEWS
 var IndexView = require('./views/index_view')
@@ -42,9 +43,14 @@ module.exports = Backbone.Router.extend({
     })
   }
 , commits: function(owner, repo, sha) {
-    new CommitsView({
+    var commits = new CommitsList([], {
       owner: owner
     , repo: repo
+    })
+    commits.fetch({
+      success: function(commits) {
+        new CommitsView({ model: commits }).render()
+      }
     })
   }
 })

@@ -3,8 +3,6 @@ var _          = require('underscore')
   , plugin     = require('plugin')
 Backbone.$ = require('jquery')
 
-var Commit = require('../models/commit')
-
 module.exports = Backbone.View.extend({
   el: '#content'
 , template: require('../templates/commit')
