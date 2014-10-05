@@ -14,7 +14,15 @@ module.exports = Backbone.View.extend({
     console.log('go to previous')
   }
 , nextCommit: function() {
-    console.log('go to next')
+    var modelIndex = this.model.collection.indexOf(this.model)
+      , nextModel = this.model.collection.at(modelIndex + 1)
+
+    if (nextModel != undefined) {
+      this.model = nextModel
+      this.render()
+    } else {
+      console.error('Next commit not found!')
+    }
   }
 , render: function() {
     $(this.el).html(this.template(this.model))

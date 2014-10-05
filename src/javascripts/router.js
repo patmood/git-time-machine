@@ -18,8 +18,7 @@ module.exports = Backbone.Router.extend({
     '': 'index'
   , 'users/:username(/)': 'user'
   , 'users(/)': 'users'
-  , 'repos/:owner/:repo/commits/:sha(/)': 'commit'
-  , 'repos/:owner/:repo/commits(/)': 'commits'
+  , 'repos/:owner/:repo/commits(/)(:sha)(/)': 'commits'
   }
 , index: function() {
     new IndexView({ el: '#content' })
@@ -30,18 +29,6 @@ module.exports = Backbone.Router.extend({
 , user: function(username) {
     new UserView({ username: username })
   }
-, commit: function(owner, repo, sha) {
-    var commit = new Commit({
-      owner: owner
-    , repo: repo
-    , sha: sha
-    })
-    commit.fetch({
-      success: function(commit) {
-        new CommitView({ model: commit }).render()
-      }
-    })
-  }
 , commits: function(owner, repo, sha) {
     var commits = new CommitsList([], {
       owner: owner
@@ -49,7 +36,7 @@ module.exports = Backbone.Router.extend({
     })
     commits.fetch({
       success: function(commits) {
-        new CommitsView({ model: commits }).render()
+        new CommitsView({ model: commits, sha: sha })
       }
     })
   }
