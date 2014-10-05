@@ -7,15 +7,15 @@ module.exports = Backbone.View.extend({
   el: '#content'
 , template: require('../templates/commit')
 , events: {
-    'click #prev-commit': 'prevCommit'
-  , 'click #next-commit': 'nextCommit'
+    'click .navigate-commit': 'changeCommit'
   }
 , prevCommit: function() {
     console.log('go to previous')
   }
-, nextCommit: function() {
+, changeCommit: function(e) {
+    var direction = parseInt($(e.currentTarget).data('direction'))
     var modelIndex = this.model.collection.indexOf(this.model)
-      , nextModel = this.model.collection.at(modelIndex + 1)
+      , nextModel = this.model.collection.at(modelIndex + direction)
 
     if (nextModel != undefined) {
       this.model = nextModel
