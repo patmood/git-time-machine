@@ -2,5 +2,5 @@
 <button class="navigate-commit" data-direction="1">Next</button>
 <p>This is a commit {{ attributes.sha }}</p>
 {{#each attributes.files}}
-{{filename}}<br>
+ <textarea>{{patch}}</textarea><br>
 {{/each}}
