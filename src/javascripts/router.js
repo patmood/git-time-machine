@@ -2,6 +2,9 @@ var _          = require('underscore')
   , Backbone   = require('backbone')
 Backbone.$ = require('jquery')
 
+// HELPERS
+var parseQueryString = require('./helpers').parseQueryString
+
 // MODELS
 var Commit = require('./models/commit')
 var CommitsList = require('./models/commits_collection')
@@ -18,7 +21,7 @@ module.exports = Backbone.Router.extend({
     '': 'index'
   , 'users/:username(/)': 'user'
   , 'users(/)': 'users'
-  , 'repos/:owner/:repo/commits(/)(:sha)(/)': 'commits'
+  , 'repos/:owner/:repo/commits(/)(:sha)(/)(?*queryString)': 'commits'
   }
 , index: function() {
     new IndexView({ el: '#content' })
@@ -29,10 +32,13 @@ module.exports = Backbone.Router.extend({
 , user: function(username) {
     new UserView({ username: username })
   }
-, commits: function(owner, repo, sha) {
+, commits: function(owner, repo, sha, queryString) {
+    params = parseQueryString(queryString)
+    window.q = queryString
     var commits = new CommitsList([], {
       owner: owner
     , repo: repo
+    , path: params.path
     })
     commits.fetch({
       success: function(commits) {

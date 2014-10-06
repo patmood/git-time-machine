@@ -9,13 +9,17 @@ module.exports = Backbone.Collection.extend({
 , initialize: function(models, opts) {
     this.owner = opts.owner
     this.repo = opts.repo
+    this.path = opts.path
   }
 , url: function() {
-    return [
+    var url = [
       'https://api.github.com/repos'
     , this.owner
     , this.repo
     , 'commits'
     ].join('/')
+
+    return this.path ? url + '?path=' + this.path
+                     : url
   }
 })
