@@ -4,6 +4,7 @@ var _          = require('underscore')
 Backbone.$ = require('jquery')
 
 var Commit = require('../models/commit')
+var Content = require('../models/content')
 
 module.exports = Backbone.View.extend({
   el: '#content'
@@ -12,17 +13,33 @@ module.exports = Backbone.View.extend({
     var _this = this
     if (this.model.get('files')) {
       console.log('files!')
-      this.render()
+      this.getContents()
     } else {
       console.log('no files')
       this.model.fetch({
         success: function(commit) {
-          _this.model = commit
-          _this.render()
+          _this.getContents()
         }
       })
     }
+  }
+, getContents: function() {
+    if (this.model.collection.path) {
+      // Get contents here
+      var path = this.model.collection.path
+        , _this = this
+        , file = this.model.get('files').filter( function(x) { return x.filename === path })[0]
+        , content = new Content(file)
 
+      content.fetch({
+        success: function(content) {
+          var contentString = atob(content.attributes.content)
+          _this.render(contentString)
+        }
+      })
+    } else {
+      this.render()
+    }
   }
 , events: {
     'click .navigate-commit': 'changeCommit'
@@ -40,8 +57,8 @@ module.exports = Backbone.View.extend({
       console.error('Next commit not found!')
     }
   }
-, render: function() {
-    $(this.el).html(this.template(this.model))
+, render: function(fileContents) {
+    $(this.el).html(this.template({ commit: this.model, fileContents: fileContents}))
   }
 })
 

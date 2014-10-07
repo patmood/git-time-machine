@@ -1,6 +1,12 @@
 <button class="navigate-commit" data-direction="-1">Prev</button>
 <button class="navigate-commit" data-direction="1">Next</button>
-<p>This is a commit {{ attributes.sha }}</p>
-{{#each attributes.files}}
- <textarea>{{patch}}</textarea><br>
+<p>This is a commit {{ commit.attributes.sha }}</p>
+{{#each commit.attributes.files}}
+{{filename}}<br>
 {{/each}}
+
+{{#if fileContents}}
+  Contents: {{fileContents}}
+{{else}}
+  Please select a file
+{{/if}}
