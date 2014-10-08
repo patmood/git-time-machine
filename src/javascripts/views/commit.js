@@ -1,8 +1,3 @@
-var _          = require('underscore')
-  , Backbone   = require('backbone')
-  , plugin     = require('plugin')
-Backbone.$ = require('jquery')
-
 var Commit = require('../models/commit')
 var Content = require('../models/content')
 
@@ -26,6 +21,7 @@ module.exports = Backbone.View.extend({
 , getContents: function() {
     if (this.model.collection.path) {
       // Get contents here
+      // TODO: Use underscore findWhere method to get file
       var path = this.model.collection.path
         , _this = this
         , file = this.model.get('files').filter( function(x) { return x.filename === path })[0]

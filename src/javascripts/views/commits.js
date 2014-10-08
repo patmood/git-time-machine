@@ -1,8 +1,3 @@
-var _          = require('underscore')
-  , Backbone   = require('backbone')
-  , plugin     = require('plugin')
-Backbone.$ = require('jquery')
-
 var CommitView = require('./commit')
 
 module.exports = Backbone.View.extend({

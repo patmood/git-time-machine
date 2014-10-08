@@ -1,8 +1,3 @@
-var _          = require('underscore')
-  , Backbone   = require('backbone')
-  , plugin     = require('plugin')
-Backbone.$ = require('jquery')
-
 var User = require('../models/user')
 
 module.exports = Backbone.View.extend({

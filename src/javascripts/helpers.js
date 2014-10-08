@@ -1,5 +1,3 @@
-var _ = require('underscore')
-
 module.exports.parseQueryString = function(queryString){
   var params = {}
   if(queryString){

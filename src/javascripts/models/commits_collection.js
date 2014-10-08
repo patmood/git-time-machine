@@ -1,7 +1,3 @@
-var _          = require('underscore')
-  , Backbone   = require('backbone')
-Backbone.$ = require('jquery')
-
 var Commit = require('./commit')
 
 module.exports = Backbone.Collection.extend({

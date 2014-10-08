@@ -1,7 +1,3 @@
-var _          = require('underscore')
-  , Backbone   = require('backbone')
-Backbone.$ = require('jquery')
-
 // HELPERS
 var parseQueryString = require('./helpers').parseQueryString
 
