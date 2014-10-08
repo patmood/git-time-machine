@@ -37,7 +37,8 @@ module.exports = Backbone.Router.extend({
     , path: params.path
     })
     commits.fetch({
-      success: function(commits) {
+      cache: true
+    , success: function(commits) {
         new CommitsView({ model: commits, sha: sha })
       }
     })

@@ -12,7 +12,8 @@ module.exports = Backbone.View.extend({
     } else {
       console.log('no files')
       this.model.fetch({
-        success: function(commit) {
+        cache: true
+      , success: function(commit) {
           _this.getContents()
         }
       })
@@ -28,7 +29,8 @@ module.exports = Backbone.View.extend({
         , content = new Content(file)
 
       content.fetch({
-        success: function(content) {
+        cache: true
+      , success: function(content) {
           var contentString = atob(content.attributes.content)
           _this.render(contentString)
         }
