@@ -59,7 +59,7 @@ module.exports = Backbone.View.extend({
     }
   }
 , render: function(fileContents) {
-    window.App.router.navigate( this.model.get('url').match(/(repos.+)/gi)[0] + '/?path=' + this.path )
+    window.App.router.navigate( this.model.get('url').match(/(repos.+)/gi)[0] + '?path=' + this.path )
     $(this.el).html(this.template({ commit: this.model, fileContents: fileContents}))
   }
 })
