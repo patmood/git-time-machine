@@ -23,8 +23,7 @@ module.exports = Backbone.View.extend({
     })
     // TODO: if the specific commit is not in the collection, fetch it
     if (!commit) console.error('No commit found!')
-    window.App.router.navigate( commit.get('url').match(/(repos.+)/gi)[0] )
-    new CommitView({ model: commit })
+    new CommitView({ model: commit, path: this.model.path })
   }
 })
 

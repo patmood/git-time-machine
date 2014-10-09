@@ -5,6 +5,10 @@ module.exports = Backbone.View.extend({
   el: '#content'
 , template: require('../templates/commit')
 , initialize: function(opts) {
+    this.path = opts.path
+    this.getFileList()
+  }
+, getFileList: function() {
     var _this = this
     if (this.model.get('files')) {
       console.log('files!')
@@ -13,16 +17,16 @@ module.exports = Backbone.View.extend({
       console.log('no files')
       this.model.fetch({
         cache: true
-      , success: function(commit) {
+      , success: function() {
           _this.getContents()
         }
       })
     }
   }
 , getContents: function() {
-    if (this.model.collection.path) {
+    if (this.path) {
       // Get contents here
-      var path = this.model.collection.path
+      var path = this.path
         , _this = this
         , file = _.findWhere(this.model.get('files'), { filename: path })
         , content = new Content(file)
@@ -49,12 +53,13 @@ module.exports = Backbone.View.extend({
 
     if (nextModel != undefined) {
       this.model = nextModel
-      this.initialize()
+      this.getFileList()
     } else {
       console.error('Next commit not found!')
     }
   }
 , render: function(fileContents) {
+    window.App.router.navigate( this.model.get('url').match(/(repos.+)/gi)[0] + '/?path=' + this.path )
     $(this.el).html(this.template({ commit: this.model, fileContents: fileContents}))
   }
 })

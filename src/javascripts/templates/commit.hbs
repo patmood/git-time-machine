@@ -1,7 +1,6 @@
 <button class="navigate-commit" data-direction="-1">Prev</button>
 <button class="navigate-commit" data-direction="1">Next</button>
-<p>This is a commit {{ commit.attributes.sha }}</p>
-
+<p>Sha: {{commit.attributes.sha}}</p>
 {{#if fileContents}}
   <pre><code>{{fileContents}}</code></pre>
 {{else}}
