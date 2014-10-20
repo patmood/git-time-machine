@@ -5,5 +5,7 @@ Time machine for Github files
 
 ## TODO
 
-- Basic repo file navigation
-- Cache backbone fetch calls
+- Get the next batch of commits in a series
+- Check how it works with branches
+- Authenticate requests https://gist.github.com/hannestyden/563893
+
