@@ -36,6 +36,7 @@ module.exports = Backbone.Router.extend({
       owner: owner
     , repo: repo
     , path: params.path
+    , sha: sha
     })
     commits.fetch({
       cache: true

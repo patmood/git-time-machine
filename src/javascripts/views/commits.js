@@ -18,7 +18,18 @@ module.exports = Backbone.View.extend({
     if (nextCommit != undefined) {
       this.renderCommit(nextCommit.get('sha'))
     } else {
-      console.error('Next commit not found!')
+      console.log('Next commit not found!')
+      var _this = this
+      this.model.until = this.commit.get('commit').committer.date
+      this.model.fetch({
+        cache: true
+      , remove: false
+      , success: function() {
+          console.log('got older')
+          _this.model.until = null
+          _this.render()
+        }
+      })
     }
   }
 , goToCommit: function(e) {
@@ -30,13 +41,13 @@ module.exports = Backbone.View.extend({
     if (this.sha) renderCommit(this.sha)
   }
 , renderCommit: function(sha) {
-    var commit = _.find(this.model.models, function(commit) {
+    this.commit = _.find(this.model.models, function(commit) {
       return commit.attributes.sha === sha
     })
-    this.commitIndex = this.model.models.indexOf(commit)
+    this.commitIndex = this.model.models.indexOf(this.commit)
     // TODO: if the specific commit is not in the collection, fetch it
-    if (!commit) console.error('No commit found!')
-    new CommitView({ model: commit, path: this.model.path })
+    if (!this.commit) console.error('No commit found!')
+    new CommitView({ model: this.commit, path: this.model.path })
   }
 })
 

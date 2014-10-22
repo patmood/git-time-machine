@@ -2,6 +2,9 @@ var Commit = require('./commit')
 
 module.exports = Backbone.Collection.extend({
   model: Commit
+, comparator: function(model) {
+    return Date.parse(model.get('commiter.date'))
+  }
 , initialize: function(models, opts) {
     this.owner = opts.owner
     this.repo = opts.repo
