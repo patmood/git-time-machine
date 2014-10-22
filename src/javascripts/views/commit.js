@@ -47,6 +47,9 @@ module.exports = Backbone.View.extend({
     window.App.router.navigate( this.model.get('url').match(/(repos.+)/gi)[0] + '?path=' + this.path )
     console.log(this.model)
     $(this.el).html(this.template({ commit: this.model, fileContents: fileContents}))
+    $('pre code').each(function(i, block) {
+      hljs.highlightBlock(block)
+    })
   }
 })
 

@@ -5,7 +5,9 @@ Time machine for Github files
 
 ## TODO
 
-- After fetch for series of commits, use the time of the first commit to get a series 'until' the first one. ie, get the history
+- Render a new commit once another fetch is completed
+- Fetch newer commits if you hit the other end
+- Chrome app to link directly from GH
 - Check how it works with branches
 - Authenticate requests https://gist.github.com/hannestyden/563893
 
