@@ -2,7 +2,7 @@ var Commit = require('../models/commit')
 var Content = require('../models/content')
 
 module.exports = Backbone.View.extend({
-  el: '#content'
+  el: '#commit'
 , template: require('../templates/commit')
 , initialize: function(opts) {
     this.path = opts.path
@@ -18,6 +18,7 @@ module.exports = Backbone.View.extend({
       this.model.fetch({
         cache: true
       , success: function() {
+          console.log('got files')
           _this.getContents()
         }
       })
@@ -40,22 +41,6 @@ module.exports = Backbone.View.extend({
       })
     } else {
       this.render()
-    }
-  }
-, events: {
-    'click .navigate-commit': 'changeCommit'
-  }
-, changeCommit: function(e) {
-    //TODO: handle case when model does not have a collection
-    var direction = parseInt($(e.currentTarget).data('direction'))
-    var modelIndex = this.model.collection.indexOf(this.model)
-      , nextModel = this.model.collection.at(modelIndex + direction)
-
-    if (nextModel != undefined) {
-      this.model = nextModel
-      this.getFileList()
-    } else {
-      console.error('Next commit not found!')
     }
   }
 , render: function(fileContents) {

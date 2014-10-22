@@ -2,7 +2,10 @@
 <ul>
   {{#each models}}
   <li>
-    <a id={{attributes.sha}} href="#">{{attributes.commit.author.date}}</a>
+    {{cid}} <a id={{attributes.sha}} href="#">{{attributes.commit.author.date}}</a>
   </li>
   {{/each}}
 </ul>
+<button class="navigate-commit" data-direction="-1">Prev</button>
+<button class="navigate-commit" data-direction="1">Next</button>
+<div id="commit"></div>

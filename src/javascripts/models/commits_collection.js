@@ -8,14 +8,20 @@ module.exports = Backbone.Collection.extend({
     this.path = opts.path
   }
 , url: function() {
-    var url = [
-      'https://api.github.com/repos'
-    , this.owner
-    , this.repo
-    , 'commits'
-    ].join('/')
+    var url = [[
+        'https://api.github.com/repos'
+      , this.owner
+      , this.repo
+      , 'commits'
+      ].join('/')
+    , '?path='
+    , (this.path || '')
+    , '&until='
+    , (this.until || '')
+    , '&sha='
+    , (this.sha || '')
+    ].join('')
 
-    return this.path ? url + '?path=' + this.path
-                     : url
+    return url
   }
 })
