@@ -23,7 +23,7 @@ module.exports = Backbone.View.extend({
       this.model.until = this.commit.get('commit').committer.date
       this.model.fetch({
         cache: true
-      , remove: false
+      , add: true
       , success: function() {
           console.log('got older')
           _this.model.until = null

@@ -18,7 +18,6 @@ module.exports = Backbone.Router.extend({
   , 'users/:username(/)': 'user'
   , 'users(/)': 'users'
   , 'repos/:owner/:repo/commits(/)(:sha)(/)(?*queryString)': 'commits'
-  , ':owner/:repo/contents/:sha/*path': 'content' // Need away to capture url to end of line as the path has / characters in it
   }
 , index: function() {
     new IndexView({ el: '#content' })
@@ -43,21 +42,6 @@ module.exports = Backbone.Router.extend({
     , success: function(commits) {
         new CommitsView({ model: commits, sha: sha, path: params.path })
       }
-    })
-  }
-, content: function(owner, repo, sha, path) {
-    // Get the individual commit and contents and render view
-    var commit = new Commit({
-      owner: owner
-    , repo: repo
-    , sha: sha
-    })
-
-    commit.fetch({
-      cache: true
-    , success: function(commit) {
-      new CommitView({ model: commit, path: path })
-    }
     })
   }
 })
