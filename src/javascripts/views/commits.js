@@ -15,7 +15,6 @@ module.exports = Backbone.View.extend({
   }
 , olderCommit: function() {
     if (this.commit === this.commit.nxt()) {
-      console.log("get older commits")
       this.fetchOlder()
     } else {
       this.commit = this.commit.nxt()
@@ -23,12 +22,17 @@ module.exports = Backbone.View.extend({
     }
   }
 , newerCommit: function() {
-    this.commit = this.commit.prev()
-    this.renderCommit()
+    if (this.commit === this.commit.prev()) {
+      this.fetchNewer()
+    } else {
+      this.commit = this.commit.prev()
+      this.renderCommit()
+    }
   }
 , fetchOlder: function() {
    var _this = this
    this.collection.sha = null // This will be set to sha of current commit when fetching newer commits
+   this.collection.sha = this.commit.get('sha')
    this.collection.until = this.commit.get('commit').committer.date
    // TODO: Prevent the same commit coming back over and over again
    this.collection.fetch({
@@ -37,6 +41,23 @@ module.exports = Backbone.View.extend({
    , success: function(touched) {
        console.log('got older')
        _this.collection.until = null
+       // TODO: Prevent page position from changing after re-rendering full template
+       _this.render()
+       _this.olderCommit()
+     }
+   })
+  }
+, fetchNewer: function() {
+   var _this = this
+   this.collection.sha = this.commit.get('sha')
+   this.collection.since = this.commit.get('commit').committer.date
+   // TODO: Prevent the same commit coming back over and over again
+   this.collection.fetch({
+     cache: true
+   , remove: false
+   , success: function(touched) {
+       console.log('got older')
+       _this.collection.since = null
        // TODO: Prevent page position from changing after re-rendering full template
        _this.render()
        _this.olderCommit()

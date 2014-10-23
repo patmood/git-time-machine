@@ -23,6 +23,8 @@ module.exports = Backbone.Collection.extend({
     , (this.path || '')
     , '&until='
     , (this.until || '')
+    , '&since='
+    , (this.since || '')
     , '&sha='
     , (this.sha || '')
     ].join('')
