@@ -9,6 +9,16 @@ module.exports = Backbone.Model.extend({
                   + '/commits/'
                   + this.get('sha')
   }
+, index: function() {
+    return this.collection.indexOf(this)
+  }
+, nxt: function() {
+    return this.collection.at(this.index() + 1) || this
+  }
+, prev: function() {
+    return this.collection.at(this.index() - 1) || this
+  }
+,
 })
 
 
