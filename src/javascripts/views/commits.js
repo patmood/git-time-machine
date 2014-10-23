@@ -4,6 +4,7 @@ module.exports = Backbone.View.extend({
   el: '#content'
 , template: require('../templates/commits')
 , initialize: function(opts) {
+    // TODO: set the initial commit to the url sha if it exists, then make the sha null
     this.commit = this.collection.at(0)
     this.render()
   }
@@ -13,27 +14,34 @@ module.exports = Backbone.View.extend({
   , 'click #newer-commit': 'newerCommit'
   }
 , olderCommit: function() {
-    this.commit = this.commit.nxt()
-    this.renderCommit()
-
-//     console.log('Next commit not found!')
-//     var _this = this
-//
-//     this.collection.until = this.commit.get('commit').committer.date
-//     this.collection.fetch({
-//       cache: true
-//     , add: true
-//     , success: function() {
-//         console.log('got older')
-//         _this.model.until = null
-//         // Re-render full template since collection changed
-//         _this.render()
-//       }
-//     })
+    if (this.commit === this.commit.nxt()) {
+      console.log("get older commits")
+      this.fetchOlder()
+    } else {
+      this.commit = this.commit.nxt()
+      this.renderCommit()
+    }
   }
 , newerCommit: function() {
     this.commit = this.commit.prev()
     this.renderCommit()
+  }
+, fetchOlder: function() {
+   var _this = this
+   this.collection.sha = null // This will be set to sha of current commit when fetching newer commits
+   this.collection.until = this.commit.get('commit').committer.date
+   // TODO: Prevent the same commit coming back over and over again
+   this.collection.fetch({
+     cache: true
+   , remove: false
+   , success: function(touched) {
+       console.log('got older')
+       _this.collection.until = null
+       // TODO: Prevent page position from changing after re-rendering full template
+       _this.render()
+       _this.olderCommit()
+     }
+   })
   }
 , goToCommit: function(e) {
     e.preventDefault()
