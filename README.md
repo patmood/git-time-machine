@@ -5,9 +5,7 @@ Time machine for Github files
 
 ## TODO
 
-- Can requests be made with &until= and &since= in same request?
-- Double check getting 'newer' commits works
-- Resort after updating commits list?
+- Prevent duplicate commits being added using http://stackoverflow.com/questions/6416958/how-to-make-backbone-js-collection-items-unique
 - DRY up fetching of older/newer commits
 - Render list of commits in a timeline at the top of the page
 - Chrome app to link directly from GH

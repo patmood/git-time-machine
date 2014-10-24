@@ -10,8 +10,12 @@ module.exports = Backbone.Collection.extend({
     this.branch = opts.branch
   }
 , model: Commit
-, comparator: function(model) {
-    return Date.parse(model.get('commiter.date'))
+, comparator: function(a, b) {
+    var dateA = (a.get('commit').committer.date)
+      , dateB = (b.get('commit').committer.date)
+    return dateA < dateB ? 1
+         : dateA > dateB ? -1
+         : 0
   }
 , url: function() {
     var url = [[
