@@ -30,38 +30,29 @@ module.exports = Backbone.View.extend({
     }
   }
 , fetchOlder: function() {
-   var _this = this
    this.collection.sha = this.collection.branch
    this.collection.until = this.commit.get('commit').committer.date
+   this.fetchMore(this.olderCommit)
+  }
+, fetchNewer: function() {
+   this.collection.sha = this.commit.get('branch')
+   this.collection.since = this.commit.get('commit').committer.date
+   this.fetchMore(this.newerCommit)
+  }
+, fetchMore: function(next) {
    // TODO: Prevent the same commit coming back over and over again
+   var _this = this
    this.collection.fetch({
      remove: false
    , add: true
    , cache: true
    , success: function(touched) {
-       console.log('got older')
+       console.log('got more! touched:', touched)
+       _this.collection.since = null
        _this.collection.until = null
        // TODO: Prevent page position from changing after re-rendering full template
        _this.render()
-       _this.olderCommit()
-     }
-   })
-  }
-, fetchNewer: function() {
-   var _this = this
-   this.collection.sha = this.commit.get('branch')
-   this.collection.since = this.commit.get('commit').committer.date
-   // TODO: Prevent the same commit coming back over and over again
-   this.collection.fetch({
-     remove: false
-   , add: true
-   , cache: true
-   , success: function(touched) {
-       console.log('got newer')
-       _this.collection.since = null
-       // TODO: Prevent page position from changing after re-rendering full template
-       _this.render()
-       _this.olderCommit()
+       next()
      }
    })
   }

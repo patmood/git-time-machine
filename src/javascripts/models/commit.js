@@ -1,5 +1,9 @@
 module.exports = Backbone.Model.extend({
-  url: function() {
+  initialize: function() {
+    var sha = this.get('sha')
+    this.set('id', sha)
+  }
+, url: function() {
     var url = this.get('url')
     return url ? url
                : 'https://api.github.com/repos/'
