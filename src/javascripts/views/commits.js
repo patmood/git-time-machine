@@ -35,8 +35,9 @@ module.exports = Backbone.View.extend({
    this.collection.until = this.commit.get('commit').committer.date
    // TODO: Prevent the same commit coming back over and over again
    this.collection.fetch({
-     cache: true
-   , remove: false
+     remove: false
+   , add: true
+   , cache: true
    , success: function(touched) {
        console.log('got older')
        _this.collection.until = null
@@ -53,6 +54,8 @@ module.exports = Backbone.View.extend({
    // TODO: Prevent the same commit coming back over and over again
    this.collection.fetch({
      remove: false
+   , add: true
+   , cache: true
    , success: function(touched) {
        console.log('got newer')
        _this.collection.since = null
