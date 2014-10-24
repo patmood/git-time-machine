@@ -7,6 +7,7 @@ module.exports = Backbone.Collection.extend({
     this.sha = opts.sha
     this.owner = opts.owner
     this.repo = opts.repo
+    this.branch = opts.branch
   }
 , model: Commit
 , comparator: function(model) {
@@ -21,13 +22,15 @@ module.exports = Backbone.Collection.extend({
       ].join('/')
     , '?path='
     , (this.path || '')
-    , '&until='
-    , (this.until || '')
-    , '&since='
-    , (this.since || '')
     , '&sha='
     , (this.sha || '')
     ].join('')
+
+    if (this.until) {
+      url = url + '&until=' + this.until
+    } else if (this.since) {
+      url = url + '&since=' + this.since
+    }
 
     return url
   }

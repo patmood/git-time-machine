@@ -31,8 +31,7 @@ module.exports = Backbone.View.extend({
   }
 , fetchOlder: function() {
    var _this = this
-   this.collection.sha = null // This will be set to sha of current commit when fetching newer commits
-   this.collection.sha = this.commit.get('sha')
+   this.collection.sha = this.collection.branch
    this.collection.until = this.commit.get('commit').committer.date
    // TODO: Prevent the same commit coming back over and over again
    this.collection.fetch({
@@ -49,14 +48,13 @@ module.exports = Backbone.View.extend({
   }
 , fetchNewer: function() {
    var _this = this
-   this.collection.sha = this.commit.get('sha')
+   this.collection.sha = this.commit.get('branch')
    this.collection.since = this.commit.get('commit').committer.date
    // TODO: Prevent the same commit coming back over and over again
    this.collection.fetch({
-     cache: true
-   , remove: false
+     remove: false
    , success: function(touched) {
-       console.log('got older')
+       console.log('got newer')
        _this.collection.since = null
        // TODO: Prevent page position from changing after re-rendering full template
        _this.render()
