@@ -5,12 +5,13 @@ Time machine for Github files
 
 ## TODO
 
-- Prevent duplicate commits being added using http://stackoverflow.com/questions/6416958/how-to-make-backbone-js-collection-items-unique
-- DRY up fetching of older/newer commits
-- Render list of commits in a timeline at the top of the page
+- Authentication
+  - Setup simple express server with https://github.com/prose/gatekeeper
+  -
+- Prevent dups!!! Collection#add is not being hit due to cache and/or 304 not modified response...
+- Render list of commits in a timeline at the top of the page https://github.com/almende/vis/blob/master/examples/timeline/01_basic.html
 - Chrome app to link directly from GH
 - Check how it works with branches
-- Authenticate requests https://gist.github.com/hannestyden/563893
 
 ## NOTES
 

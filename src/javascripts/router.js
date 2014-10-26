@@ -39,6 +39,7 @@ module.exports = Backbone.Router.extend({
     })
     commits.fetch({
       cache: true
+    // , headers: {'Authorization' :'token OAUTH-TOKEN'}
     , success: function(commits) {
         new CommitsView({ collection: commits })
       }

@@ -46,6 +46,7 @@ module.exports = Backbone.View.extend({
      remove: false
    , add: true
    , cache: true
+   // , headers: {'Authorization' :'token OAUTH-TOKEN'}
    , success: function(touched) {
        console.log('got more! touched:', touched)
        _this.collection.since = null
