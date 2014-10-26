@@ -10,9 +10,7 @@ dotenv.load()
 var express = require('express'),
     app     = express();
 
-app.configure(function() {
-  app.use(express.static(__dirname + '/build/'));
-});
+app.use(express.static(__dirname + '/build/'));
 
 function authenticate(code, next) {
   var data = qs.stringify({
