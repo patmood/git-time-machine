@@ -2,3 +2,4 @@
 build
 Desktop.ini
 node_modules
+.env

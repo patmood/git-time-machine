@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git@github.com:patmood/github-time-machine.git"
   },
+  "scripts": {
+    "start": "node server.js"
+  },
   "browser": {
     "underscore": "backbone/node_modules/underscore",
     "plugin": "./src/javascripts/vendor/jquery-plugin.js"
@@ -45,6 +48,8 @@
   },
   "dependencies": {
     "backbone": "~1.1.2",
+    "dotenv": "^0.4.0",
+    "express": "~3.16.0",
     "jquery": "~2.1.0"
   }
 }
