@@ -7,6 +7,7 @@ var gulp  = require('gulp');
 var config= require('../config');
 
 gulp.task('watch', ['setWatch'], function() {
+  gulp.watch(config.browserify.src, ['browserify']);
   gulp.watch(config.images.src, ['images']);
   gulp.watch(config.markup.src, ['markup']);
   gulp.watch(config.stylus.src, ['stylus']);
