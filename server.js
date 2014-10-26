@@ -10,6 +10,10 @@ dotenv.load()
 var express = require('express'),
     app     = express();
 
+app.configure(function() {
+  app.use(express.static(__dirname + '/build/'));
+});
+
 function authenticate(code, next) {
   var data = qs.stringify({
     client_id: process.env.OAUTH_CLIENT_ID,
@@ -48,6 +52,10 @@ app.all('*', function (req, res, next) {
   next();
 });
 
+// Serve static app
+app.get('/', function(req, res) {
+  res.sendfile(__dirname + '/build/index.html')
+})
 
 app.get('/authenticate/:code', function(req, res) {
   console.log('authenticating code:' + req.params.code);
