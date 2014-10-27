@@ -43,11 +43,7 @@ module.exports = Backbone.View.extend({
    // TODO: Prevent the same commit coming back over and over again
    var _this = this
    this.collection.fetch({
-     remove: false
-   , add: true
-   , cache: true
-   // , headers: {'Authorization' :'token OAUTH-TOKEN'}
-   , success: function(touched) {
+     success: function(touched) {
        console.log('got more! touched:', touched)
        _this.collection.since = null
        _this.collection.until = null

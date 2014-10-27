@@ -16,9 +16,7 @@ module.exports = Backbone.View.extend({
     } else {
       console.log('no files')
       this.model.fetch({
-        cache: true
-      // , headers: {'Authorization' :'token OAUTH-TOKEN'}
-      , success: function() {
+        success: function() {
           console.log('got files')
           _this.getContents()
         }
@@ -34,9 +32,7 @@ module.exports = Backbone.View.extend({
         , content = new Content(file)
 
       content.fetch({
-        cache: true
-      // , headers: {'Authorization' :'token OAUTH-TOKEN'}
-      , success: function(content) {
+        success: function(content) {
           var contentString = atob(content.attributes.content)
           _this.render(contentString)
         }

@@ -1,3 +1,4 @@
+var auth = require('../lib/auth')
 var Commit = require('./commit')
 
 module.exports = Backbone.Collection.extend({
@@ -16,6 +17,16 @@ module.exports = Backbone.Collection.extend({
     return dateA < dateB ? 1
          : dateA > dateB ? -1
          : 0
+  }
+, fetch: function(options) {
+    var defaults = {
+      remove: false
+    , add: true
+    , cache: true
+    , headers: {'Authorization' :'token ' + auth.getToken() }
+    }
+    _.extend(options, defaults)
+    return Backbone.Collection.prototype.fetch.call(this, options)
   }
 , url: function() {
     var url = [[

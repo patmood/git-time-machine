@@ -1,3 +1,5 @@
+var auth = require('../lib/auth')
+
 module.exports = Backbone.Model.extend({
   initialize: function() {
     var sha = this.get('sha')
@@ -12,6 +14,16 @@ module.exports = Backbone.Model.extend({
                   + this.get('repo')
                   + '/commits/'
                   + this.get('sha')
+  }
+, fetch: function(options) {
+    var defaults = {
+      remove: false
+    , add: true
+    , cache: true
+    , headers: {'Authorization' :'token ' + auth.getToken() }
+    }
+    _.extend(options, defaults)
+    return Backbone.Collection.prototype.fetch.call(this, options)
   }
 , index: function() {
     return this.collection.indexOf(this)
