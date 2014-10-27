@@ -29,15 +29,17 @@ module.exports = Backbone.Router.extend({
 , auth: function(queryString) {
     var params = parseQueryString(queryString)
       , _this = this
+      , dest = decodeURIComponent(window.readCookie('lastUrl')) || '/'
 
     if (params.code) {
       console.log('AUTH: getting token')
-      auth.fetchToken(params.code, function(data) {
-        console.log('router got token:', data)
-        _this.navigate('/', { trigger: true })
+      auth.fetchToken(params.code, function() {
+        console.log('Redirecting to:', dest)
+        _this.navigate(dest, { trigger: true })
       })
     } else {
-      this.signin()
+      console.error('No code parameter provided')
+      // this.signin()
     }
   }
 , signin: function() {
@@ -61,18 +63,19 @@ module.exports = Backbone.Router.extend({
     new UserView({ username: username })
   }
 , commits: function(owner, repo, sha, queryString) {
-    var params = parseQueryString(queryString)
-    window.q = queryString
-    var commits = new CommitsList([], {
-      owner: owner
-    , repo: repo
-    , path: params.path
-    , sha: sha
-    })
-    commits.fetch({
-      success: function(commits) {
-        new CommitsView({ collection: commits })
-      }
-    })
+    if (auth.checkUser()) {
+      var params = parseQueryString(queryString)
+      var commits = new CommitsList([], {
+        owner: owner
+      , repo: repo
+      , path: params.path
+      , sha: sha
+      })
+      commits.fetch({
+        success: function(commits) {
+          new CommitsView({ collection: commits })
+        }
+      })
+    }
   }
 })
