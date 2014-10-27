@@ -16,7 +16,9 @@ var CommitsView = require('./views/commits')
 module.exports = Backbone.Router.extend({
   routes: {
     '': 'index'
-  , 'login(/)(?*queryString)': 'auth'
+  , 'auth(/)(?*queryString)': 'auth'
+  , 'signin(/)': 'signin'
+  , 'signout(/)': 'signout'
   , 'users/:username(/)': 'user'
   , 'users(/)': 'users'
   , 'repos/:owner/:repo/commits(/)(:sha)(/)(?*queryString)': 'commits'
@@ -27,7 +29,6 @@ module.exports = Backbone.Router.extend({
 , auth: function(queryString) {
     var params = parseQueryString(queryString)
       , _this = this
-      , token = auth.getToken()
 
     if (params.code) {
       console.log('AUTH: getting token')
@@ -35,14 +36,24 @@ module.exports = Backbone.Router.extend({
         console.log('router got token:', data)
         _this.navigate('/', { trigger: true })
       })
-    } else if (token) {
+    } else {
+      this.signin()
+    }
+  }
+, signin: function() {
+    var token = auth.getToken()
+    if (token) {
       console.log('AUTH: token exists!')
-      _this.navigate('/', { trigger: true })
+      this.navigate('/', { trigger: true })
     } else {
       console.log('AUTH: no token, sign in')
       auth.authenticate()
     }
-}
+  }
+, signout: function() {
+    auth.destroy()
+    this.navigate('/', { trigger: true })
+  }
 , users: function() {
     new UsersView()
   }

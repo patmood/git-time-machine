@@ -26,8 +26,8 @@ module.exports = {
 
       if (!window.token) {
         console.error('No token found')
-        debugger
-        return this.authenticate() // should this be automatic?
+        // debugger
+        // return this.authenticate() // should this be automatic?
       }
     }
 
@@ -35,5 +35,9 @@ module.exports = {
   }
 , authenticate: function() {
     window.location.replace("https://github.com/login/oauth/authorize?client_id=3dbe9b15a57c1f2ae62d&scope=repo")
+  }
+, destroy: function() {
+    window.token = null
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
   }
 }
