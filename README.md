@@ -6,7 +6,6 @@ Time machine for Github files
 ## TODO
 
 - Authentication
-  - Setup simple express server with https://github.com/prose/gatekeeper
   - login https://github.com/login/oauth/authorize?client_id=3dbe9b15a57c1f2ae62d&scope=repo
   - get code from above and send to http://localhost:9999/authenticate/:code
   - Use that token in all the requests

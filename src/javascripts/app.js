@@ -5,4 +5,4 @@ var Router = require('./router')
 window.App.router = new Router()
 
 
-Backbone.history.start()
+Backbone.history.start({ pushState: true })

@@ -19,3 +19,7 @@ module.exports.parseQueryString = function(queryString){
   }
   return params;
 }
+
+module.exports.getToken = function(code, next) {
+  $.getJSON('http://localhost:9999/authenticate/' + code, next)
+}

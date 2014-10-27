@@ -1,5 +1,6 @@
 // HELPERS
 var parseQueryString = require('./helpers').parseQueryString
+var auth = require('./lib/auth')
 
 // MODELS
 var Commit = require('./models/commit')
@@ -15,6 +16,7 @@ var CommitsView = require('./views/commits')
 module.exports = Backbone.Router.extend({
   routes: {
     '': 'index'
+  , 'login(/)(?*queryString)': 'auth'
   , 'users/:username(/)': 'user'
   , 'users(/)': 'users'
   , 'repos/:owner/:repo/commits(/)(:sha)(/)(?*queryString)': 'commits'
@@ -22,6 +24,25 @@ module.exports = Backbone.Router.extend({
 , index: function() {
     new IndexView({ el: '#content' })
   }
+, auth: function(queryString) {
+    var params = parseQueryString(queryString)
+      , _this = this
+      , token = auth.getToken()
+
+    if (params.code) {
+      console.log('AUTH: getting token')
+      auth.fetchToken(params.code, function(data) {
+        console.log('router got token:', data)
+        _this.navigate('/', { trigger: true })
+      })
+    } else if (token) {
+      console.log('AUTH: token exists!')
+      _this.navigate('/', { trigger: true })
+    } else {
+      console.log('AUTH: no token, sign in')
+      auth.authenticate()
+    }
+}
 , users: function() {
     new UsersView()
   }
@@ -29,7 +50,7 @@ module.exports = Backbone.Router.extend({
     new UserView({ username: username })
   }
 , commits: function(owner, repo, sha, queryString) {
-    params = parseQueryString(queryString)
+    var params = parseQueryString(queryString)
     window.q = queryString
     var commits = new CommitsList([], {
       owner: owner

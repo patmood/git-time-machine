@@ -50,11 +50,6 @@ app.all('*', function (req, res, next) {
   next();
 });
 
-// Serve static app
-app.get('/', function(req, res) {
-  res.sendfile(__dirname + '/build/index.html')
-})
-
 app.get('/authenticate/:code', function(req, res) {
   console.log('authenticating code:' + req.params.code);
   authenticate(req.params.code, function(err, token) {
@@ -63,6 +58,12 @@ app.get('/authenticate/:code', function(req, res) {
     res.json(result);
   });
 });
+
+// Serve static app
+app.get('*', function(req, res) {
+  res.sendfile(__dirname + '/build/index.html')
+})
+
 
 var port = process.env.PORT || 9999;
 
