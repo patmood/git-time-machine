@@ -65,6 +65,7 @@ module.exports = Backbone.Router.extend({
 , commits: function(owner, repo, sha, queryString) {
     if (auth.checkUser()) {
       var params = parseQueryString(queryString)
+      if (!params.path) return console.error('no path detected!');
       var commits = new CommitsList([], {
         owner: owner
       , repo: repo
