@@ -61,10 +61,35 @@ module.exports = Backbone.View.extend({
 , render: function() {
     $(this.el).html(this.template(this.collection))
     this.renderCommit()
+    this.renderTimeline()
   }
 , renderCommit: function() {
     if (!this.commit) console.error('No commit found!')
     new CommitView({ model: this.commit, path: this.collection.path })
+  }
+, renderTimeline: function() {
+    var min = this.collection.min(function(commit) {
+      return commit.date()
+    })
+
+    var container = document.getElementById('timeline')
+      , data = new vis.DataSet({ fieldId: 'sha' })
+      , options = {
+          height: 200
+        //TODO: set sane ranges that dont cut off the labels
+        //, max: new Date()
+        //, min: new Date(min.date().setDate(min.date().getDate()-1))
+        }
+
+    this.collection.forEach(function(commit) {
+      data.add({
+        id: commit.get('sha')
+      , content: commit.get('commit').message
+      , start: new Date(commit.get('commit').committer.date)
+      })
+    })
+
+    this.timeline = new vis.Timeline(container, data, options)
   }
 })
 

@@ -34,6 +34,9 @@ module.exports = Backbone.Model.extend({
 , prev: function() {
     return this.collection.at(this.index() - 1) || this
   }
+, date: function() {
+    return new Date(this.get('commit').committer.date)
+  }
 ,
 })
 
