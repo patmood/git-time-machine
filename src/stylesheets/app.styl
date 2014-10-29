@@ -1,3 +1,6 @@
+html, body
+  min-height: 100%
+
 body
   font-family: sans-serif
   background: url('images/galaxy.jpg') no-repeat center center fixed
@@ -21,6 +24,9 @@ body
 .commit-nav
   text-align: center
 
+#commit
+  overflow: scroll
+
 #older-commit, #newer-commit
   font-size: 24px
   padding: 8px 50px
@@ -28,3 +34,11 @@ body
   color: #fff
   border: none
   border-radius: 5px
+
+.commit-list
+  position: absolute
+  font-size: 10px
+  top: 200px
+  right: 0
+  width: 200px
+  background: rgba(200, 54, 54, 0.5)

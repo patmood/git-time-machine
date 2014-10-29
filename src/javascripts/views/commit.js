@@ -48,6 +48,10 @@ module.exports = Backbone.View.extend({
     $('pre code').each(function(i, block) {
       hljs.highlightBlock(block)
     })
+
+    //Set a good height
+    var idealHeight = $(window).height() - $('#commit').offset().top
+    $(this.el).css('height', idealHeight)
   }
 })
 

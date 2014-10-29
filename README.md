@@ -4,6 +4,8 @@ Git Time Machine
 Time machine for Github files
 
 ## TODO
+- Freeze timeline and nav header
+- maintain line number
 - Clicking timeline commit goes to that commit
 - Select the current commit on the timeline when using next/prev buttons
 - Make sure the timeline doesnt zoom too far in
