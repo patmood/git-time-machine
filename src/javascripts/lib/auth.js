@@ -1,7 +1,7 @@
 module.exports = {
   fetchToken: function(code, next) {
     var _this = this
-    $.getJSON('http://localhost:9999/authenticate/' + code, function(json) {
+    $.getJSON('/authenticate/' + code, function(json) {
       _this.setToken(json.token)
       next()
     })
@@ -22,7 +22,7 @@ module.exports = {
       , urlPath = encodeURIComponent(window.location.toString().replace(reg, ''))
 
     document.cookie = 'lastUrl=' + urlPath + '; path=/'
-    window.location.replace("https://github.com/login/oauth/authorize?client_id=3dbe9b15a57c1f2ae62d&scope=repo")
+    window.location.replace('/authenticate')
   }
 , destroy: function() {
     window.cookies = {}

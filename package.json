@@ -33,7 +33,7 @@
     "browserify": "~5.10.1",
     "browserify-shim": "~3.7.0",
     "coffeeify": "~0.7.0",
-    "gulp": "^3.8.7",
+    "gulp": "3.8.*",
     "gulp-changed": "^0.4.1",
     "gulp-imagemin": "^0.6.2",
     "gulp-nodemon": "^1.0.4",

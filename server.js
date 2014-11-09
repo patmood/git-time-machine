@@ -59,6 +59,12 @@ app.get('/authenticate/:code', function(req, res) {
   });
 });
 
+app.get('/authenticate', function(req, res) {
+  res.redirect('https://github.com/login/oauth/authorize?client_id='
+              + process.env.OAUTH_CLIENT_ID
+              + '&scope=repo')
+})
+
 // Serve static app
 app.get('*', function(req, res) {
   res.sendfile(__dirname + '/build/index.html')
