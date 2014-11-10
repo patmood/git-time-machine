@@ -1,0 +1,16 @@
+{
+  "name": "Git Time Machine",
+  "version": "0.1",
+  "description": "Time machine for files on github",
+  "author": "Patrick Moody",
+  "content_scripts": [
+    {
+      "matches": ["*://github.com/*/*/blob/*/*"],
+      "css": ["time_machine_button.css"],
+      "js": ["time_machine_button.js"]
+    }
+  ],
+  "icons": { "128" : "icon.png"},
+  "manifest_version": 2,
+  "web_accessible_resources": ["galaxy_button.png"]
+}
