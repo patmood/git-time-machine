@@ -5,10 +5,13 @@
   "author": "Patrick Moody",
   "content_scripts": [
     {
-      "matches": ["*://github.com/*/*/blob/*/*"],
+      "matches": ["*://github.com/*"],
       "css": ["time_machine_button.css"],
       "js": ["time_machine_button.js"]
     }
+  ],
+  "permissions": [
+    "tabs"
   ],
   "icons": { "128" : "icon.png"},
   "manifest_version": 2,
