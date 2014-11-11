@@ -69,7 +69,7 @@ module.exports = Backbone.View.extend({
   }
 , permalink: function() {
     var html_path = this.model.get('html_url').match(/github.com(.+)$/)[1]
-    return html_path.replace('commit', 'blob') + this.path
+    return html_path.replace('commit', 'blob') + '/' + this.path
   }
 })
 

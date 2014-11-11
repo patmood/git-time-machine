@@ -8,7 +8,6 @@ module.exports = Backbone.Collection.extend({
     this.sha = opts.sha
     this.owner = opts.owner
     this.repo = opts.repo
-    this.branch = opts.branch
   }
 , model: Commit
 , comparator: function(a, b) {
