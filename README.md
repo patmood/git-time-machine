@@ -4,11 +4,9 @@ Git Time Machine
 Time machine for Github files
 
 ## TODO
-- Clicking timeline commit goes to that commit
-- Select the current commit on the timeline when using next/prev buttons
-- Make sure the timeline doesnt zoom too far in
 - Match github's url structure exactly so it can link to 'mydomain.com' + window.location.pathname
 - Prevent dups!!! Collection#add is not being hit due to cache and/or 304 not modified response...
+- Highlight changed lines
 - Browserify vis.js
 - Extensions for other browsers
 

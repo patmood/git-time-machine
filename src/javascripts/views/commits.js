@@ -71,12 +71,13 @@ module.exports = Backbone.View.extend({
     if (!this.commit) console.error('No commit found!')
     new CommitView({ model: this.commit, path: this.collection.path })
     this.timeline.setSelection(this.commit.get('sha'))
-    // this.timeline.focus(this.commit.get('sha'))
   }
 
   //TODO: move this to a new view?
 , renderTimeline: function() {
     var _this = this
+
+    // Get date limits to restrict the timeline
     var min = this.collection.min(function(commit) {
       return commit.date()
     })
