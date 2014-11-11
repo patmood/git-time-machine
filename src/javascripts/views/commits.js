@@ -9,9 +9,9 @@ module.exports = Backbone.View.extend({
     this.render()
   }
 , events: {
-    'click a': 'goToCommit'
-  , 'click #older-commit': 'olderCommit'
+    'click #older-commit': 'olderCommit'
   , 'click #newer-commit': 'newerCommit'
+  , 'click a': 'commitClick'
   }
 , olderCommit: function() {
     if (this.commit === this.commit.nxt()) {
@@ -53,29 +53,37 @@ module.exports = Backbone.View.extend({
      }
    })
   }
-, goToCommit: function(e) {
+, commitClick: function(e) {
     e.preventDefault()
-    this.commit = this.collection.findWhere({sha: e.target.id})
+    this.goToCommit(e.target.id)
+  }
+, goToCommit: function(sha) {
+    this.commit = this.collection.findWhere({sha: sha})
     this.renderCommit()
   }
 , render: function() {
     $(this.el).html(this.template(this.collection))
-    this.renderCommit()
     this.renderTimeline()
+    this.renderCommit()
   }
 , renderCommit: function() {
     if (!this.commit) console.error('No commit found!')
     new CommitView({ model: this.commit, path: this.collection.path })
+    this.timeline.setSelection(this.commit.get('sha'))
+    // this.timeline.focus(this.commit.get('sha'))
   }
+
+  //TODO: move this to a new view?
 , renderTimeline: function() {
+    var _this = this
     var min = this.collection.min(function(commit) {
       return commit.date()
     })
 
     var container = document.getElementById('timeline')
-      , data = new vis.DataSet({ fieldId: 'sha' })
+      , data = new vis.DataSet()
       , options = {
-          height: 200
+          height: 220
         //TODO: set sane ranges that dont cut off the labels
         , max: new Date()
         , min: new Date(min.date().setDate(min.date().getDate()-1))
@@ -92,6 +100,12 @@ module.exports = Backbone.View.extend({
     })
 
     this.timeline = new vis.Timeline(container, data, options)
+
+    // add event listener
+    this.timeline.on('select', function(properties) {
+      this.focus(properties.items[0])
+      _this.goToCommit(properties.items[0])
+    })
   }
 })
 
