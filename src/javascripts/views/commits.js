@@ -77,14 +77,16 @@ module.exports = Backbone.View.extend({
       , options = {
           height: 200
         //TODO: set sane ranges that dont cut off the labels
-        //, max: new Date()
-        //, min: new Date(min.date().setDate(min.date().getDate()-1))
+        , max: new Date()
+        , min: new Date(min.date().setDate(min.date().getDate()-1))
         }
 
     this.collection.forEach(function(commit) {
+      var msg = commit.get('commit').message
+      if (msg.length >= 20) msg = msg.slice(0, 17) + '...'
       data.add({
         id: commit.get('sha')
-      , content: commit.get('commit').message
+      , content: msg
       , start: new Date(commit.get('commit').committer.date)
       })
     })
