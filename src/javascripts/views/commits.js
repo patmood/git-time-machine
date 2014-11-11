@@ -11,6 +11,7 @@ module.exports = Backbone.View.extend({
 , events: {
     'click #older-commit': 'olderCommit'
   , 'click #newer-commit': 'newerCommit'
+  , 'click #reset-timeline': 'resetTimelineWindow'
   , 'click a': 'commitClick'
   }
 , olderCommit: function() {
@@ -79,14 +80,17 @@ module.exports = Backbone.View.extend({
     var min = this.collection.min(function(commit) {
       return commit.date()
     })
+    var max = this.collection.max(function(commit) {
+      return commit.date()
+    })
 
     var container = document.getElementById('timeline')
       , data = new vis.DataSet()
       , options = {
           height: 220
         //TODO: set sane ranges that dont cut off the labels
-        , max: new Date()
-        , min: new Date(min.date().setDate(min.date().getDate()-1))
+        , max: new Date(max.date().setDate(min.date().getDate() + 2))
+        , min: new Date(min.date().setDate(min.date().getDate() - 2))
         }
 
     this.collection.forEach(function(commit) {
@@ -106,6 +110,9 @@ module.exports = Backbone.View.extend({
       this.focus(properties.items[0])
       _this.goToCommit(properties.items[0])
     })
+  }
+, resetTimelineWindow: function() {
+    this.timeline.fit()
   }
 })
 
