@@ -11,13 +11,10 @@ module.exports = Backbone.View.extend({
 , getFileList: function() {
     var _this = this
     if (this.model.get('files')) {
-      console.log('files!')
       this.getContents()
     } else {
-      console.log('no files')
       this.model.fetch({
         success: function() {
-          console.log('got files')
           _this.getContents()
         }
       })

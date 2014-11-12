@@ -7,6 +7,8 @@ module.exports = Backbone.View.extend({
     // TODO: set the initial commit to the url sha if it exists, then make the sha null
     this.commit = this.collection.at(0)
     this.render()
+    this.newestCommit = null
+    this.oldestCommit = null
   }
 , events: {
     'click #older-commit': 'olderCommit'
@@ -15,39 +17,44 @@ module.exports = Backbone.View.extend({
   , 'click a': 'commitClick'
   }
 , olderCommit: function() {
-    if (this.commit === this.commit.nxt()) {
+    var nextComm = this.commit.nxt()
+    if (this.commit === this.commit.nxt() && nextComm != this.oldestCommit) {
       this.fetchOlder()
+      this.oldestCommit = this.commit
     } else {
       this.commit = this.commit.nxt()
       this.renderCommit()
     }
   }
 , newerCommit: function() {
-    if (this.commit === this.commit.prev()) {
+    var prevComm = this.commit.prev()
+    if (this.commit === prevComm && prevComm != this.newestCommit) {
       this.fetchNewer()
+      this.newestCommit = this.commit
     } else {
-      this.commit = this.commit.prev()
+      this.commit = prevComm
       this.renderCommit()
     }
   }
 , fetchOlder: function() {
     this.collection.sha = this.commit.get('sha')
     this.collection.until = this.commit.get('commit').committer.date
-    this.fetchMore(this.olderCommit)
+    this.fetchMore(this.olderCommit.bind(this))
   }
 , fetchNewer: function() {
     this.collection.sha = this.commit.get('sha')
     this.collection.since = this.commit.get('commit').committer.date
-    this.fetchMore(this.newerCommit)
+    this.fetchMore(this.newerCommit.bind(this))
   }
 , fetchMore: function(next) {
     // TODO: Prevent the same commit coming back over and over again
+    console.log('fetching more commits')
     var _this = this
     this.collection.fetch({
       success: function(touched) {
-        console.log('got more! touched:', touched)
         _this.collection.since = null
         _this.collection.until = null
+
         // TODO: Prevent page position from changing after re-rendering full template
         _this.render()
         next()
@@ -64,6 +71,7 @@ module.exports = Backbone.View.extend({
   }
 , render: function() {
     $(this.el).html(this.template(this.collection))
+    this.collection.removeDups()
     this.renderTimeline()
     this.renderCommit()
   }

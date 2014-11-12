@@ -48,4 +48,14 @@ module.exports = Backbone.Collection.extend({
 
     return url
   }
+, removeDups: function() {
+    // HAAAACK
+    var o = {}, dups = []
+    this.each(function(c) {
+      if (o[c.get('sha')]) dups.push(c)
+      o[c.get('sha')] = c
+    })
+    console.log('dups:', dups)
+    this.remove(dups)
+  }
 })
