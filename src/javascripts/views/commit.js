@@ -11,13 +11,10 @@ module.exports = Backbone.View.extend({
 , getFileList: function() {
     var _this = this
     if (this.model.get('files')) {
-      console.log('files!')
       this.getContents()
     } else {
-      console.log('no files')
       this.model.fetch({
         success: function() {
-          console.log('got files')
           _this.getContents()
         }
       })
@@ -42,8 +39,7 @@ module.exports = Backbone.View.extend({
     }
   }
 , render: function(fileContents) {
-    window.App.router.navigate( this.model.get('url').match(/(repos.+)/gi)[0] + '?path=' + this.path )
-    console.log(this.model)
+    window.App.router.navigate(this.permalink())
     $(this.el).html(this.template({ commit: this.model, fileContents: fileContents}))
     $('pre code').each(function(i, block) {
       hljs.highlightBlock(block)
@@ -67,6 +63,10 @@ module.exports = Backbone.View.extend({
           $numbering.append($('<li/>').text(i))
         }
     })
+  }
+, permalink: function() {
+    var html_path = this.model.get('html_url').match(/github.com(.+)$/)[1]
+    return html_path.replace('commit', 'blob') + '/' + this.path
   }
 })
 

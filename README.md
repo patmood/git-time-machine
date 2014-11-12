@@ -1,17 +1,13 @@
 Git Time Machine
 =================
 
-Time machine for Github files
+Time machine for your files on github! An easier way to view the history of a single file.
+
+Useful for remembering "how that method used to work" or finding "that line you deleted weeks ago but did end up needing afterall"
 
 ## TODO
-=======
-- Match github's url structure exactly so it can link to 'mydomain.com' + window.location.pathname
-- Freeze timeline and nav header
-- Clicking timeline commit goes to that commit
-- Select the current commit on the timeline when using next/prev buttons
-- Make sure the timeline doesnt zoom too far in
-- Match github's url structure exactly so it can link to 'mydomain.com' + window.location.pathname
-- Prevent dups!!! Collection#add is not being hit due to cache and/or 304 not modified response...
+
+- Highlight changed lines
 - Browserify vis.js
 - Extensions for other browsers
 

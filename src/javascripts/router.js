@@ -21,7 +21,7 @@ module.exports = Backbone.Router.extend({
   , 'signout(/)': 'signout'
   , 'users/:username(/)': 'user'
   , 'users(/)': 'users'
-  , 'repos/:owner/:repo/commits(/)(:sha)(/)(?*queryString)': 'commits'
+  , ':owner/:repo/blob/:sha/*path': 'commits'
   }
 , index: function() {
     new IndexView({ el: '#content' })
@@ -62,14 +62,13 @@ module.exports = Backbone.Router.extend({
 , user: function(username) {
     new UserView({ username: username })
   }
-, commits: function(owner, repo, sha, queryString) {
+, commits: function(owner, repo, sha, path) {
     if (auth.checkUser()) {
-      var params = parseQueryString(queryString)
-      if (!params.path) return console.error('no path detected!');
+      if (!path) return console.error('no path detected!');
       var commits = new CommitsList([], {
         owner: owner
       , repo: repo
-      , path: params.path
+      , path: path
       , sha: sha
       })
       commits.fetch({
