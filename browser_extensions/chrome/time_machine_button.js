@@ -38,8 +38,7 @@ var addButton = function() {
   link.style.backgroundImage="url('" + imgURL + "')"
 
   // Link to Time Machine page
-  // IMPORTANT: CHANGE TO PRODUCTION DOMAIN
-  link.href = 'http://localhost:9999'
+  link.href = 'http://time-machine.herokuapp.com'
              + pathname[0]
 
   // Add to page
