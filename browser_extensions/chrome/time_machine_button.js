@@ -18,7 +18,7 @@ var addButton = function() {
   if (buttonGroup.length === 0) return;
 
   // Get details from url
-  var pattern = /^\/(\w+)\/(\w+)\/blob\/(\w+)\/(.+)$/i
+  var pattern = /^\/(.+)\/(.+)\/blob\/(.+)\/(.+)$/i
     , reg = new RegExp(pattern)
     , pathname = window.location.pathname.match(reg)
 
