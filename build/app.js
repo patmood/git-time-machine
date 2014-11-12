@@ -700,18 +700,19 @@ module.exports = Backbone.Model.extend({
 },{}],"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/router.js":[function(require,module,exports){
 // HELPERS
 var parseQueryString = require('./helpers').parseQueryString
-var auth = require('./lib/auth')
+  , auth = require('./lib/auth')
 
 // MODELS
 var Commit = require('./models/commit')
-var CommitsList = require('./models/commits_collection')
+  , CommitsList = require('./models/commits_collection')
 
 // VIEWS
 var IndexView = require('./views/index_view')
-var UserView = require('./views/user')
-var UsersView = require('./views/users')
-var CommitView = require('./views/commit')
-var CommitsView = require('./views/commits')
+  , UserView = require('./views/user')
+  , UsersView = require('./views/users')
+  , CommitView = require('./views/commit')
+  , CommitsView = require('./views/commits')
+  , NotFoundView = require('./views/not_found')
 
 module.exports = Backbone.Router.extend({
   routes: {
@@ -722,6 +723,7 @@ module.exports = Backbone.Router.extend({
   , 'users/:username(/)': 'user'
   , 'users(/)': 'users'
   , ':owner/:repo/blob/:sha/*path': 'commits'
+  , '*path': 'notFound'
   }
 , index: function() {
     new IndexView({ el: '#content' })
@@ -778,9 +780,12 @@ module.exports = Backbone.Router.extend({
       })
     }
   }
+, notFound: function() {
+    new NotFoundView().render()
+  }
 })
 
-},{"./helpers":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/helpers.js","./lib/auth":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/lib/auth.js","./models/commit":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/models/commit.js","./models/commits_collection":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/models/commits_collection.js","./views/commit":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/commit.js","./views/commits":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/commits.js","./views/index_view":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/index_view.js","./views/user":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/user.js","./views/users":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/users.js"}],"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/templates/commit.hbs":[function(require,module,exports){
+},{"./helpers":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/helpers.js","./lib/auth":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/lib/auth.js","./models/commit":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/models/commit.js","./models/commits_collection":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/models/commits_collection.js","./views/commit":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/commit.js","./views/commits":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/commits.js","./views/index_view":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/index_view.js","./views/not_found":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/not_found.js","./views/user":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/user.js","./views/users":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/users.js"}],"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/templates/commit.hbs":[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -842,6 +847,18 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 
   return "<h2>Git Time Machine</h2>\n<p>Time machine for your files on github! An easier way to view the history of a single file.</p>\n<p>Useful for remembering \"how that method used to work\" or finding \"that line you deleted weeks ago but did end up needing afterall\"</p>\n\n<h3>Step 1 - Install browser extension</h3>\n<p>Extensions coming soon!</p>\n<p>\n  <img src=\"images/browser_chrome.png\">\n  <img src=\"images/browser_firefox.png\">\n  <img src=\"images/browser_safari.png\">\n</p>\n\n<h3>Step 2 - Find a file on github</h3>\n<p>The browser extension adds a new button to the file view on github</p>\n<p><img src=\"images/github_button.png\"></p>\n\n<h3>Step 3 - Travel through time!</h3>\n<p>Watch lines of code change with each commit!</p>\n<p><img src=\"images/time_machine_example.png\"></p>\n\n<h3>Example (No browser extension required)</h3>\n<p>\n  File in backbone project: <a href=\"/patmood/hugegif/blob/a56c23c7f9524f6b7f71ae316cf1c43178266bc2/js/main.js\">/patmood/hugegif/blob/a56c23c7f9524f6b7f71ae316cf1c43178266bc2/js/main.js</a>\n</p>\n\n<h3>Signout</h3>\n<a href=\"signin\">Sign in with GitHub</a><br>\n<a href=\"signout\">Signout</a>\n";
+  });
+
+},{"hbsfy/runtime":"/Users/patrickmoody/Dev/github-time-machine/node_modules/hbsfy/runtime.js"}],"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/templates/not_found.hbs":[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var Handlebars = require('hbsfy/runtime');
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<h2>404 - Not Found</h2>\n<p>If you think this is a problem with the site, please <a href=\"https://github.com/patmood/git-time-machine/issues\" target=\"_blank\">create an issue</a> detailing how to replicate the issue.</p>\n\n<p>Thanks!</p>\n";
   });
 
 },{"hbsfy/runtime":"/Users/patrickmoody/Dev/github-time-machine/node_modules/hbsfy/runtime.js"}],"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/templates/user.hbs":[function(require,module,exports){
@@ -1083,7 +1100,16 @@ module.exports = Backbone.View.extend({
 
 })
 
-},{"../templates/index":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/templates/index.hbs"}],"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/user.js":[function(require,module,exports){
+},{"../templates/index":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/templates/index.hbs"}],"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/not_found.js":[function(require,module,exports){
+module.exports = Backbone.View.extend({
+  el: '#content'
+, template: require('../templates/not_found')
+, render: function() {
+    $(this.el).html(this.template())
+  }
+})
+
+},{"../templates/not_found":"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/templates/not_found.hbs"}],"/Users/patrickmoody/Dev/github-time-machine/src/javascripts/views/user.js":[function(require,module,exports){
 var User = require('../models/user')
 
 module.exports = Backbone.View.extend({

@@ -1,17 +1,18 @@
 // HELPERS
 var parseQueryString = require('./helpers').parseQueryString
-var auth = require('./lib/auth')
+  , auth = require('./lib/auth')
 
 // MODELS
 var Commit = require('./models/commit')
-var CommitsList = require('./models/commits_collection')
+  , CommitsList = require('./models/commits_collection')
 
 // VIEWS
 var IndexView = require('./views/index_view')
-var UserView = require('./views/user')
-var UsersView = require('./views/users')
-var CommitView = require('./views/commit')
-var CommitsView = require('./views/commits')
+  , UserView = require('./views/user')
+  , UsersView = require('./views/users')
+  , CommitView = require('./views/commit')
+  , CommitsView = require('./views/commits')
+  , NotFoundView = require('./views/not_found')
 
 module.exports = Backbone.Router.extend({
   routes: {
@@ -22,6 +23,7 @@ module.exports = Backbone.Router.extend({
   , 'users/:username(/)': 'user'
   , 'users(/)': 'users'
   , ':owner/:repo/blob/:sha/*path': 'commits'
+  , '*path': 'notFound'
   }
 , index: function() {
     new IndexView({ el: '#content' })
@@ -77,5 +79,8 @@ module.exports = Backbone.Router.extend({
         }
       })
     }
+  }
+, notFound: function() {
+    new NotFoundView().render()
   }
 })
