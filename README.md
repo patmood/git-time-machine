@@ -9,13 +9,8 @@ Useful for remembering "how that method used to work" or finding "that line you 
 
 - Highlight changed lines
 - Browserify vis.js
+- Compress js
 - Extensions for other browsers
-
-## NOTES
-
-- The github 'sha' can also be a branch
-
-http://visjs.org/docs/timeline.html#Events
 
 
 ## ENV
