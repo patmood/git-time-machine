@@ -1,15 +1,5 @@
-<div class="commit-list">
-  <ul>
-    {{#each models}}
-    <li>
-      {{cid}} <a id={{attributes.sha}} href="#">{{attributes.commit.committer.date}}</a>
-    </li>
-    {{/each}}
-  </ul>
-</div>
-
 <div class="commit-controls">
-  <div id="reset-timeline">Reset Timeline</div>
+  Click, drag, and scroll timeline to navigate timeline <a href="#" id="reset-timeline">(Reset view)</a>
   <div id="timeline"></div>
   <div class="commit-nav">
     <button id="older-commit">Older</button>

@@ -14,7 +14,6 @@ module.exports = Backbone.View.extend({
     'click #older-commit': 'olderCommit'
   , 'click #newer-commit': 'newerCommit'
   , 'click #reset-timeline': 'resetTimelineWindow'
-  , 'click a': 'commitClick'
   }
 , olderCommit: function() {
     var nextComm = this.commit.nxt()
@@ -61,10 +60,6 @@ module.exports = Backbone.View.extend({
       }
     })
   }
-, commitClick: function(e) {
-    e.preventDefault()
-    this.goToCommit(e.target.id)
-  }
 , goToCommit: function(sha) {
     this.commit = this.collection.findWhere({sha: sha})
     this.renderCommit()
@@ -98,8 +93,8 @@ module.exports = Backbone.View.extend({
       , options = {
           height: 220
         //TODO: set sane ranges that dont cut off the labels
-        , max: new Date(max.date().setDate(min.date().getDate() + 2))
-        , min: new Date(min.date().setDate(min.date().getDate() - 2))
+        // , max: new Date(max.date().setDate(min.date().getDate() + 2))
+        // , min: new Date(min.date().setDate(min.date().getDate() - 2))
         }
 
     this.collection.forEach(function(commit) {
