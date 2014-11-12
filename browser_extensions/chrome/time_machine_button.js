@@ -20,15 +20,10 @@ var addButton = function() {
   // Get details from url
   var pattern = /^\/(\w+)\/(\w+)\/blob\/(\w+)\/(.+)$/i
     , reg = new RegExp(pattern)
-    , match = window.location.pathname.match(reg)
+    , pathname = window.location.pathname.match(reg)
 
   // Return if no url match
-  if (!match) return;
-
-  var username = match[1]
-    , repo = match[2]
-    , sha = match[3]
-    , path = match[4]
+  if (!pathname) return;
 
   // Create link
   var link = document.createElement('a')
@@ -43,15 +38,9 @@ var addButton = function() {
   link.style.backgroundImage="url('" + imgURL + "')"
 
   // Link to Time Machine page
-  // TODO: Match github's url structure exactly so it can link to 'mydomain.com' + window.location.pathname
-  link.href = 'http://localhost:9999/repos/'
-             + username
-             + '/'
-             + repo
-             + '/commits/'
-             + sha
-             + '?path='
-             + path
+  // IMPORTANT: CHANGE TO PRODUCTION DOMAIN
+  link.href = 'http://localhost:9999'
+             + pathname[0]
 
   // Add to page
   buttonGroup[0].appendChild(link)
