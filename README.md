@@ -4,8 +4,6 @@ Git Time Machine
 Time machine for Github files
 
 ## TODO
-- Match github's url structure exactly so it can link to 'mydomain.com' + window.location.pathname
-- Prevent dups!!! Collection#add is not being hit due to cache and/or 304 not modified response...
 - Highlight changed lines
 - Browserify vis.js
 - Extensions for other browsers
