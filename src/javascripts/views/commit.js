@@ -1,5 +1,5 @@
 var Commit = require('../models/commit')
-var Content = require('../models/content')
+  , Content = require('../models/content')
 
 module.exports = Backbone.View.extend({
   el: '#commit'
@@ -50,6 +50,7 @@ module.exports = Backbone.View.extend({
     $(this.el).css('height', idealHeight)
 
     this.addLineNumbers()
+    this.highlightDiff()
   }
 , addLineNumbers: function() {
     $('pre code').each(function(){
@@ -63,6 +64,21 @@ module.exports = Backbone.View.extend({
           $numbering.append($('<li/>').text(i))
         }
     })
+  }
+, highlightDiff: function() {
+    var file = _.findWhere(this.model.get('files'), { filename: this.path })
+      , regex = /\+(\d+,\d+)\s@@/g
+      , match
+
+    console.log(file.patch)
+
+    while (match = regex.exec(file.patch)) {
+      var lines = match[1].split(',')
+        , startLine = parseInt(lines[0])
+        , endLine = startLine + parseInt(lines[1]) + 1
+      console.log(lines)
+      $('pre ul').children().slice(startLine, endLine).css({'background-color':'green'})
+    }
   }
 , permalink: function() {
     var html_path = this.model.get('html_url').match(/github.com(.+)$/)[1]
