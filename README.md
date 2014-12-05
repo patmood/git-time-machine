@@ -7,7 +7,9 @@ Useful for remembering "how that method used to work" or finding "that line you 
 
 ## TODO
 
+- Show author in details
 - Highlight changed lines
+- Track file renames (dynamically update path)
 - Browserify vis.js
 - Compress js
 - Extensions for other browsers
