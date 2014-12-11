@@ -1,6 +1,8 @@
 Git Time Machine
 =================
 
+http://time-machine.herokuapp.com/
+
 Time machine for your files on github! An easier way to view the history of a single file.
 
 Useful for remembering "how that method used to work" or finding "that line you deleted weeks ago but did end up needing afterall"
