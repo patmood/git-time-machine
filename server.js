@@ -51,11 +51,9 @@ app.all('*', function (req, res, next) {
 });
 
 app.get('/authenticate/:code', function(req, res) {
-  console.log('authenticating code:' + req.params.code);
   authenticate(req.params.code, function(err, token) {
-    var result = err || !token ? {"error": "bad_code"} : { "token": token };
-    console.log(result);
-    res.json(result);
+    var result = err || !token ? {"error": "bad_code"} : { "token": token }
+    res.json(result)
   });
 });
 
