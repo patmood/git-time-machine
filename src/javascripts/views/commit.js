@@ -52,10 +52,6 @@ module.exports = Backbone.View.extend({
       hljs.highlightBlock(block)
     })
 
-    //Set a good height
-    var idealHeight = $(window).height() - $('#commit').offset().top
-    $(this.el).css('height', idealHeight)
-
     this.addLineNumbers()
   }
 , addLineNumbers: function() {

@@ -40,11 +40,27 @@ a {
   color: #428bca;
   text-decoration: none;
 }
+.btn {
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  position: relative;
+  padding: 0.3em 1em;
+}
+.btn:hover {
+  background-color: #2980b9;
+}
 .landing-page {
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
-  max-width: 90%;
+  width: 90%;
+  max-width: 800px;
   margin: auto;
 }
 .landing-page h1,
@@ -59,6 +75,7 @@ a {
   -webkit-box-shadow: 0 2px 5px 2px rgba(0,0,0,0.3);
   -moz-box-shadow: 0 2px 5px 2px rgba(0,0,0,0.3);
   box-shadow: 0 2px 5px 2px rgba(0,0,0,0.3);
+  max-width: 100%;
 }
 .vis .overlay {
   position: absolute;
@@ -660,25 +677,22 @@ div.network-navigation.zoomExtends {
 .vis.timeline .item {
   padding: 0px 4px;
 }
-.commits {
+.commits #timeline-container {
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
   max-width: 90%;
   margin: auto;
-  margin-bottom: 20px;
 }
 .commits .commit-nav {
+  padding: 20px;
   text-align: center;
 }
-.commits #older-commit,
-.commits #newer-commit {
-  font-size: 24px;
-  padding: 8px 50px;
-  background: #9c344c;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+.commits .toggle-button {
+  background-color: #2ecc71;
+}
+.commits .toggle-button:hover {
+  background-color: #27ae60;
 }
 #commit {
   overflow: scroll;

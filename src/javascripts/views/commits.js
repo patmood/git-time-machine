@@ -14,6 +14,7 @@ module.exports = Backbone.View.extend({
     'click #older-commit': 'olderCommit'
   , 'click #newer-commit': 'newerCommit'
   , 'click #reset-timeline': 'resetTimelineWindow'
+  , 'click .toggle-button': 'toggleTimeline'
   }
 , olderCommit: function() {
     var nextComm = this.commit.nxt()
@@ -74,6 +75,7 @@ module.exports = Backbone.View.extend({
     if (!this.commit) console.error('No commit found!')
     new CommitView({ model: this.commit, path: this.collection.path })
     this.timeline.setSelection(this.commit.get('sha'))
+    this.resetCommitHeight()
   }
 
   //TODO: move this to a new view?
@@ -117,6 +119,15 @@ module.exports = Backbone.View.extend({
   }
 , resetTimelineWindow: function() {
     this.timeline.fit()
+  }
+, toggleTimeline: function() {
+    $('#timeline-container').slideToggle(200, this.resetCommitHeight)
+    $('.toggle-button').toggle()
+  }
+
+, resetCommitHeight: function() {
+    var idealHeight = $(window).height() - $('#commit').offset().top - 10
+    $('#commit').css('height', idealHeight)
   }
 })
 

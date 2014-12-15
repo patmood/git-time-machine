@@ -1,9 +1,13 @@
 <div class="commits">
-  Click, drag, and scroll timeline to navigate timeline <a href="#" id="reset-timeline">(Reset view)</a>
-  <div id="timeline"></div>
+  <div id="timeline-container">
+    Click, drag, and scroll timeline to navigate timeline <a href="#" id="reset-timeline">(Reset view)</a>
+    <div id="timeline"></div>
+  </div>
   <div class="commit-nav">
-    <button id="older-commit">Older</button>
-    <button id="newer-commit">Newer</button>
+    <button id="older-commit" class="btn">Older</button>
+    <button id="newer-commit" class="btn">Newer</button>
+    <button class="btn toggle-button">Hide Timeline</button>
+    <button class="btn toggle-button" hidden>Show Timeline</button>
   </div>
 </div>
 <div id="commit"></div>
