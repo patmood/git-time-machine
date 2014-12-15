@@ -6,13 +6,15 @@
     </div>
     <div class="details">
       <strong>Message:</strong> {{commit.attributes.commit.message}}<br>
-      <strong>Date:</strong> {{commit.attributes.commit.author.date}}<br>
+      <strong>Date:</strong> {{prettyDate}}<br>
       <a href={{file.blob_url}}>View on Github</a>
     </div>
   </div>
-  {{#if fileContents}}
-    <pre class="pre"><code class="code">{{fileContents}}</code></pre>
-  {{else}}
-    Please select a file
-  {{/if}}
+  <div class="file-contents">
+    {{#if fileContents}}
+      <pre class="pre"><code class="code">{{fileContents}}</code></pre>
+    {{else}}
+      Please select a file
+    {{/if}}
+  </div>
 </div>

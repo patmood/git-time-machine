@@ -47,6 +47,7 @@ module.exports = Backbone.View.extend({
       commit: this.model
     , file: this.file
     , fileContents: fileContents
+    , prettyDate: moment(this.model.get('commit').author.date).format('MMMM Do YYYY, h:mm a')
     }))
     $('pre code').each(function(i, block) {
       hljs.highlightBlock(block)

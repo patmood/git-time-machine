@@ -701,22 +701,23 @@ div.network-navigation.zoomExtends {
   width: 800px;
   margin: auto;
 }
-#commit .author {
-  display: inline-block;
-}
-#commit .details {
-  display: inline-block;
-  vertical-align: top;
-}
-#commit .avatar {
-  width: 70px;
-  margin-right: 10px;
-}
 #commit .info {
   margin: 20px;
   width: 100%;
 }
-#commit .pre {
+#commit .info .author {
+  display: inline-block;
+  text-align: center;
+}
+#commit .info .avatar {
+  width: 50px;
+}
+#commit .info .details {
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 20px;
+}
+#commit .file-contents .pre {
   font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
   position: relative;
   margin-bottom: 24px;
@@ -726,7 +727,7 @@ div.network-navigation.zoomExtends {
   line-height: 1.2em;
   overflow: hidden;
 }
-#commit .code {
+#commit .file-contents .code {
   display: block;
   padding: 5px 24px;
   overflow-y: auto;
@@ -734,10 +735,10 @@ div.network-navigation.zoomExtends {
   font-family: Menlo, monospace;
   font-size: 0.8em;
 }
-#commit .code.has-numbering {
+#commit .file-contents .code.has-numbering {
   margin-left: 21px;
 }
-#commit .pre-numbering {
+#commit .file-contents .pre-numbering {
   position: absolute;
   top: 0;
   left: 0;
