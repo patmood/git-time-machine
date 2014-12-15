@@ -683,6 +683,11 @@ div.network-navigation.zoomExtends {
   width: 800px;
   margin: auto;
 }
+#commit .avatar {
+  width: 70px;
+  float: left;
+  margin-right: 10px;
+}
 #commit .info {
   margin: 20px;
 }

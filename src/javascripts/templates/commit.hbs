@@ -1,12 +1,11 @@
 <div class="commit">
   <div class="info">
     <p>
+      <img src={{commit.attributes.committer.avatar_url}} class="avatar">
       <strong>Author:</strong> {{commit.attributes.author.login}}<br>
       <strong>Message:</strong> {{commit.attributes.commit.message}}<br>
       <strong>Date:</strong> {{commit.attributes.commit.author.date}}<br>
-      <hr>
-      <strong>Index:</strong> {{commit.cid}}<br>
-      <strong>Sha:</strong> {{commit.attributes.sha}}<br>
+      <a href={{file.blob_url}}>View on Github</a>
     </p>
   </div>
   {{#if fileContents}}

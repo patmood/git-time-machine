@@ -28,6 +28,8 @@ module.exports = Backbone.View.extend({
         , file = _.findWhere(this.model.get('files'), { filename: path })
         , content = new Content(file)
 
+      this.file = file
+
       content.fetch({
         success: function(content) {
           var contentString = atob(content.attributes.content)
@@ -39,9 +41,13 @@ module.exports = Backbone.View.extend({
     }
   }
 , render: function(fileContents) {
-    console.log(this.model)
+    console.log(this.file)
     window.App.router.navigate(this.permalink())
-    $(this.el).html(this.template({ commit: this.model, fileContents: fileContents}))
+    $(this.el).html(this.template({
+      commit: this.model
+    , file: this.file
+    , fileContents: fileContents
+    }))
     $('pre code').each(function(i, block) {
       hljs.highlightBlock(block)
     })
