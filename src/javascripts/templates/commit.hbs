@@ -1,12 +1,14 @@
 <div class="commit">
   <div class="info">
-    <p>
-      <img src={{commit.attributes.committer.avatar_url}} class="avatar">
-      <strong>Author:</strong> {{commit.attributes.author.login}}<br>
+    <div class="author">
+      <img src={{commit.attributes.committer.avatar_url}} class="avatar"><br>
+      @{{commit.attributes.author.login}}
+    </div>
+    <div class="details">
       <strong>Message:</strong> {{commit.attributes.commit.message}}<br>
       <strong>Date:</strong> {{commit.attributes.commit.author.date}}<br>
       <a href={{file.blob_url}}>View on Github</a>
-    </p>
+    </div>
   </div>
   {{#if fileContents}}
     <pre class="pre"><code class="code">{{fileContents}}</code></pre>

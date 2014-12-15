@@ -9,6 +9,10 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  line-height: 1.5em;
+  margin-bottom: 0px;
+  font-size: 16px;
+  color: #444;
 }
 .headline,
 .headline a {
@@ -31,12 +35,6 @@ h2 {
 }
 h3 {
   letter-spacing: -0.02em;
-}
-p {
-  line-height: 1.5em;
-  margin-bottom: 0px;
-  font-size: 16px;
-  color: #444;
 }
 a {
   color: #428bca;
@@ -656,6 +654,12 @@ div.network-navigation.zoomExtends {
   bottom: 50px;
   right: 15px;
 }
+.vis.timeline .item .content {
+  font-size: 14px;
+}
+.vis.timeline .item {
+  padding: 0px 4px;
+}
 .commits {
   padding: 20px;
   background-color: #fff;
@@ -683,20 +687,29 @@ div.network-navigation.zoomExtends {
   width: 800px;
   margin: auto;
 }
+#commit .author {
+  display: inline-block;
+}
+#commit .details {
+  display: inline-block;
+  vertical-align: top;
+}
 #commit .avatar {
   width: 70px;
-  float: left;
   margin-right: 10px;
 }
 #commit .info {
   margin: 20px;
+  width: 100%;
 }
 #commit .pre {
+  font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
   position: relative;
   margin-bottom: 24px;
   border-radius: 3px;
   border: 1px solid #c3ccd0;
   background: #fff;
+  line-height: 1.2em;
   overflow: hidden;
 }
 #commit .code {
@@ -724,7 +737,4 @@ div.network-navigation.zoomExtends {
   font-size: 0.8em;
   color: #aaa;
   margin: 0;
-}
-.vis.timeline .item .content {
-  font-size: 14px;
 }
