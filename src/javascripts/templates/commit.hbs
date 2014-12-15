@@ -1,11 +1,17 @@
-<p>
-  <strong>Index:</strong> {{commit.cid}}<br>
-  <strong>Sha:</strong> {{commit.attributes.sha}}<br>
-  <strong>Message:</strong> {{commit.attributes.commit.message}}<br>
-  <strong>Date:</strong> {{commit.attributes.commit.committer.date}}<br>
-</p>
-{{#if fileContents}}
-  <pre class="pre"><code class="code">{{fileContents}}</code></pre>
-{{else}}
-  Please select a file
-{{/if}}
+<div class="commit">
+  <div class="info">
+    <p>
+      <strong>Author:</strong> {{commit.attributes.author.login}}<br>
+      <strong>Message:</strong> {{commit.attributes.commit.message}}<br>
+      <strong>Date:</strong> {{commit.attributes.commit.author.date}}<br>
+      <hr>
+      <strong>Index:</strong> {{commit.cid}}<br>
+      <strong>Sha:</strong> {{commit.attributes.sha}}<br>
+    </p>
+  </div>
+  {{#if fileContents}}
+    <pre class="pre"><code class="code">{{fileContents}}</code></pre>
+  {{else}}
+    Please select a file
+  {{/if}}
+</div>

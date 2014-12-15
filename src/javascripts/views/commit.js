@@ -39,6 +39,7 @@ module.exports = Backbone.View.extend({
     }
   }
 , render: function(fileContents) {
+    console.log(this.model)
     window.App.router.navigate(this.permalink())
     $(this.el).html(this.template({ commit: this.model, fileContents: fileContents}))
     $('pre code').each(function(i, block) {

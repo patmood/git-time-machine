@@ -42,7 +42,7 @@ a {
   color: #428bca;
   text-decoration: none;
 }
-#content {
+.landing-page {
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
@@ -656,17 +656,19 @@ div.network-navigation.zoomExtends {
   bottom: 50px;
   right: 15px;
 }
-.commit-controls {
+.commits {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  max-width: 90%;
+  margin: auto;
   margin-bottom: 20px;
 }
-.commit-nav {
+.commits .commit-nav {
   text-align: center;
 }
-#commit {
-  overflow: scroll;
-}
-#older-commit,
-#newer-commit {
+.commits #older-commit,
+.commits #newer-commit {
   font-size: 24px;
   padding: 8px 50px;
   background: #9c344c;
@@ -674,7 +676,17 @@ div.network-navigation.zoomExtends {
   border: none;
   border-radius: 5px;
 }
-.pre {
+#commit {
+  overflow: scroll;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 800px;
+  margin: auto;
+}
+#commit .info {
+  margin: 20px;
+}
+#commit .pre {
   position: relative;
   margin-bottom: 24px;
   border-radius: 3px;
@@ -682,7 +694,7 @@ div.network-navigation.zoomExtends {
   background: #fff;
   overflow: hidden;
 }
-.code {
+#commit .code {
   display: block;
   padding: 5px 24px;
   overflow-y: auto;
@@ -690,10 +702,10 @@ div.network-navigation.zoomExtends {
   font-family: Menlo, monospace;
   font-size: 0.8em;
 }
-.code.has-numbering {
+#commit .code.has-numbering {
   margin-left: 21px;
 }
-.pre-numbering {
+#commit .pre-numbering {
   position: absolute;
   top: 0;
   left: 0;
