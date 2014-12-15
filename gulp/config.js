@@ -28,7 +28,7 @@ module.exports = {
     src: src + "/stylesheets/**",
     dest: dest,
     options: {
-      compress: true
+      compress: false
     }
   },
   browserify: {
