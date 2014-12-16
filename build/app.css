@@ -671,18 +671,33 @@ div.network-navigation.zoomExtends {
   bottom: 50px;
   right: 15px;
 }
+.vis.timeline {
+  transition: all 0.5s ease-in-out;
+  transition-delay: 0.5s;
+}
 .vis.timeline .item .content {
   font-size: 14px;
 }
 .vis.timeline .item {
   padding: 0px 4px;
 }
-.commits #timeline-container {
+.commits .timeline-container {
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
   max-width: 90%;
   margin: auto;
+  transition: all 0.3s ease-in-out;
+  height: 240px;
+}
+.commits .hide-animate {
+  overflow: hidden;
+  padding: 0;
+  height: 0 !important;
+  border-width: 0;
+}
+.commits .fade-animate {
+  opacity: 0;
 }
 .commits .commit-nav {
   padding: 20px;
@@ -700,6 +715,7 @@ div.network-navigation.zoomExtends {
   border-radius: 5px;
   width: 800px;
   margin: auto;
+  transition: all 0.3s ease-in-out;
 }
 #commit .info {
   margin: 20px;

@@ -2,12 +2,23 @@
 @import 'timeline'
 
 .commits
-  #timeline-container
+  .timeline-container
     padding: 20px
     background-color: #fff
     border-radius: 5px
     max-width: 90%
     margin: auto
+    transition: all 0.3s ease-in-out
+    height: 240px
+
+  .hide-animate
+    overflow: hidden
+    padding: 0
+    height: 0 !important
+    border-width: 0
+
+  .fade-animate
+    opacity: 0
 
   .commit-nav
     padding: 20px

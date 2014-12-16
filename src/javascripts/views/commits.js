@@ -121,8 +121,10 @@ module.exports = Backbone.View.extend({
     this.timeline.fit()
   }
 , toggleTimeline: function() {
-    $('#timeline-container').slideToggle(200, this.resetCommitHeight)
+    $('#timeline-container').toggleClass('hide-animate')
+    $('.vis.timeline').toggleClass('fade-animate')
     $('.toggle-button').toggle()
+    setTimeout(this.resetCommitHeight, 300)
   }
 
 , resetCommitHeight: function() {
