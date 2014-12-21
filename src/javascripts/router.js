@@ -8,11 +8,9 @@ var Commit = require('./models/commit')
 
 // VIEWS
 var IndexView = require('./views/index_view')
-  , UserView = require('./views/user')
-  , UsersView = require('./views/users')
   , CommitView = require('./views/commit')
   , CommitsView = require('./views/commits')
-  , NotFoundView = require('./views/not_found')
+  , ErrorView = require('./views/error')
 
 module.exports = Backbone.Router.extend({
   routes: {
@@ -20,8 +18,6 @@ module.exports = Backbone.Router.extend({
   , 'auth(/)(?*queryString)': 'auth'
   , 'signin(/)': 'signin'
   , 'signout(/)': 'signout'
-  , 'users/:username(/)': 'user'
-  , 'users(/)': 'users'
   , ':owner/:repo/blob/:sha/*path': 'commits'
   , '*path': 'notFound'
   }
@@ -58,12 +54,6 @@ module.exports = Backbone.Router.extend({
     auth.destroy()
     this.navigate('/', { trigger: true })
   }
-, users: function() {
-    new UsersView()
-  }
-, user: function(username) {
-    new UserView({ username: username })
-  }
 , commits: function(owner, repo, sha, path) {
     if (!path) return console.error('no path detected!');
     console.log('getting commits')
@@ -77,13 +67,12 @@ module.exports = Backbone.Router.extend({
       success: function(commits) {
         new CommitsView({ collection: commits })
       }
-    , error: function(err) {
-        console.log(err)
-        new NotFoundView().render()
+    , error: function(model, res) {
+        new ErrorView().render(res.status)
       }
     })
   }
 , notFound: function() {
-    new NotFoundView().render()
+    new ErrorView().render()
   }
 })
