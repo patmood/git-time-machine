@@ -40,6 +40,14 @@ a {
   color: #428bca;
   text-decoration: none;
 }
+.content-area {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+}
 .btn {
   background-color: #3498db;
   color: #fff;
@@ -54,14 +62,6 @@ a {
 }
 .btn:hover {
   background-color: #2980b9;
-}
-.landing-page {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  width: 90%;
-  max-width: 800px;
-  margin: auto;
 }
 .landing-page h1,
 .landing-page h2,

@@ -13,8 +13,7 @@ module.exports = {
     document.cookie = 'token=' + token + '; expires=' + d.setDate(d.getDate() + 1) + '; path=/'
   }
 , getToken: function () {
-    var token = window.readCookie('token')
-    return token || this.authenticate()
+    return window.readCookie('token')
   }
 , authenticate: function() {
     var d = new Date()

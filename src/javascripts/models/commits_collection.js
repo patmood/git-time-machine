@@ -22,8 +22,12 @@ module.exports = Backbone.Collection.extend({
       remove: false
     , add: true
     , cache: true
-    , headers: {'Authorization' :'token ' + auth.getToken() }
     }
+
+    if (token = auth.getToken()) {
+      defaults.headers = {'Authorization' :'token ' + token }
+    }
+
     _.extend(options, defaults)
     return Backbone.Collection.prototype.fetch.call(this, options)
   }

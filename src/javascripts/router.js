@@ -65,20 +65,23 @@ module.exports = Backbone.Router.extend({
     new UserView({ username: username })
   }
 , commits: function(owner, repo, sha, path) {
-    if (auth.checkUser()) {
-      if (!path) return console.error('no path detected!');
-      var commits = new CommitsList([], {
-        owner: owner
-      , repo: repo
-      , path: path
-      , sha: sha
-      })
-      commits.fetch({
-        success: function(commits) {
-          new CommitsView({ collection: commits })
-        }
-      })
-    }
+    if (!path) return console.error('no path detected!');
+    console.log('getting commits')
+    var commits = new CommitsList([], {
+      owner: owner
+    , repo: repo
+    , path: path
+    , sha: sha
+    })
+    commits.fetch({
+      success: function(commits) {
+        new CommitsView({ collection: commits })
+      }
+    , error: function(err) {
+        console.log(err)
+        new NotFoundView().render()
+      }
+    })
   }
 , notFound: function() {
     new NotFoundView().render()
