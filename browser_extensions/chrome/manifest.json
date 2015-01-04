@@ -1,6 +1,6 @@
 {
   "name": "Git Time Machine",
-  "version": "0.1",
+  "version": "1.0",
   "description": "Time machine for files on github",
   "author": "Patrick Moody",
   "content_scripts": [
