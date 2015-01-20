@@ -38,7 +38,7 @@ var addButton = function() {
   link.style.backgroundImage="url('" + imgURL + "')"
 
   // Link to Time Machine page
-  link.href = 'http://time-machine.herokuapp.com'
+  link.href = 'http://www.gittimemachine.com'
              + pathname[0]
 
   // Add to page
