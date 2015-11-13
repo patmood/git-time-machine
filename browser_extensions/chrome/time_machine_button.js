@@ -12,7 +12,7 @@ document.addEventListener("DOMSubtreeModified", function() {
 }, false)
 
 var addButton = function() {
-  var buttonGroup = document.querySelectorAll('.file-box .actions .button-group')
+  var buttonGroup = document.querySelectorAll('.file-actions .btn-group')
 
   // Return if no buttons on page
   if (buttonGroup.length === 0) return;
@@ -29,7 +29,7 @@ var addButton = function() {
   var link = document.createElement('a')
   var t = document.createTextNode('Time Machine')
   link.appendChild(t)
-  link.className = 'minibutton'
+  link.className = 'btn btn-sm'
   link.id = 'time-machine'
   link.target = '_blank'
 
