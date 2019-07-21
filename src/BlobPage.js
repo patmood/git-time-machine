@@ -12,21 +12,11 @@ const textQuery = gql`
       }
     }
   }
-
-  # {
-  #   repository(name: "hugegif", owner: "patmood") {
-  #     object(expression: "master:js/main.js") {
-  #       ... on Blob {
-  #         text
-  #       }
-  #     }
-  #   }
-  # }
 `
 
 function BlobPage(props) {
-  const { owner, repo, branch, path } = props.match.params
-  const expression = `${branch}:${path}`
+  const { owner, repo, ref, path } = props.match.params
+  const expression = `${ref}:${path}`
   console.log({ expression })
   return (
     <div>

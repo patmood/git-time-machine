@@ -11,7 +11,7 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/" component={Contents} />
-        <Route path="/:owner/:repo/blob/:branch/:path*" component={BlobPage} />
+        <Route path="/:owner/:repo/blob/:ref/:path*" component={BlobPage} />
         <Route component={NoMatch} />
       </Switch>
       <Footer />
