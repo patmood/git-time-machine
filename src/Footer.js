@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router'
 
 function Footer(props) {
   return (
@@ -11,4 +10,4 @@ function Footer(props) {
   )
 }
 
-export default withRouter(Footer)
+export { Footer }

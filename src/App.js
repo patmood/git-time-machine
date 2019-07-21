@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import './App.css'
 
-import Footer from './Footer'
+import { Footer } from './Footer'
 import { Contents } from './Contents'
 import { BlobPage } from './BlobPage'
 
@@ -11,7 +11,7 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/" component={Contents} />
-        <Route path="/:owner/:repo/blob/:ref/:path*" component={BlobPage} />
+        <Route path="/:owner/:repo/blob/:gitRef/:path*" component={BlobPage} />
         <Route component={NoMatch} />
       </Switch>
       <Footer />
