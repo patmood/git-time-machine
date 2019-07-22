@@ -42,15 +42,19 @@ const FileHistory = withRouter(function FileHistory(props) {
   const [edges, setEdges] = useState([])
 
   function handleKeydown(e) {
+    if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return
+
+    const activeIndex = edges.findIndex(edge => edge.node.oid === gitRef)
+    let newEdge
     if (e.key === 'ArrowLeft') {
-      let activeIndex = edges.findIndex(edge => edge.node.oid === gitRef)
-      const newEdge = edges[activeIndex - 1]
-      props.history.push(`/${owner}/${repo}/blob/${newEdge.node.oid}/${path}`)
+      newEdge = edges[activeIndex - 1]
     } else if (e.key === 'ArrowRight') {
-      let activeIndex = edges.findIndex(edge => edge.node.oid === gitRef)
-      const newEdge = edges[activeIndex + 1]
-      props.history.push(`/${owner}/${repo}/blob/${newEdge.node.oid}/${path}`)
+      newEdge = edges[activeIndex + 1]
     }
+
+    if (!newEdge) return
+
+    props.history.push(`/${owner}/${repo}/blob/${newEdge.node.oid}/${path}`)
   }
 
   useEffect(() => {
