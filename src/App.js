@@ -3,28 +3,19 @@ import { Switch, Route } from 'react-router-dom'
 import './App.css'
 
 import { Footer } from './Footer'
-import { Contents } from './Contents'
+import { Home } from './Home'
+import { NoMatch } from './NoMatch'
 import { BlobPage } from './BlobPage'
 
 function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={Contents} />
+        <Route exact path="/" component={Home} />
         <Route path="/:owner/:repo/blob/:gitRef/:path*" component={BlobPage} />
         <Route component={NoMatch} />
       </Switch>
       <Footer />
-    </div>
-  )
-}
-
-function NoMatch({ location }) {
-  return (
-    <div>
-      <h3>
-        No match for <code>{location.pathname}</code>
-      </h3>
     </div>
   )
 }

@@ -16,7 +16,7 @@ const textQuery = gql`
   }
 `
 
-function Blob(props) {
+const Blob = React.memo(function Blob(props) {
   const { owner, repo, gitRef, path } = props
   const expression = `${gitRef}:${path}`
 
@@ -33,6 +33,6 @@ function Blob(props) {
       </Query>
     </div>
   )
-}
+})
 
 export { Blob }

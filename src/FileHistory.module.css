@@ -1,0 +1,29 @@
+.list {
+  display: flex;
+  list-style: none;
+  padding: var(--space-0);
+  margin: var(--space-0);
+  color: var(--black);
+  overflow: scroll;
+}
+
+.item {
+  text-align: center;
+  padding: var(--space-1);
+}
+
+.active {
+  background-color: var(--yellow);
+}
+
+.message {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeAgo {
+  font-size: 0.8em;
+  white-space: nowrap;
+}

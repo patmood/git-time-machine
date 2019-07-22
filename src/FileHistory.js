@@ -3,9 +3,12 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { formatDistance } from 'date-fns'
 import { Link } from 'react-router-dom'
+import cn from 'classnames'
 
 import { Loading } from './Loading'
 import { Error } from './Error'
+
+import css from './FileHistory.module.css'
 
 const historyQuery = gql`
   query HistoryForFile($repo: String!, $owner: String!, $path: String!) {
@@ -33,7 +36,7 @@ const historyQuery = gql`
   }
 `
 
-function FileHistory(props) {
+const FileHistory = React.memo(function FileHistory(props) {
   const { owner, repo, gitRef, path } = props
 
   return (
@@ -44,29 +47,35 @@ function FileHistory(props) {
           if (loading) return <Loading />
           if (error) return <Error error={error} />
 
+          const { edges } = data.repository.defaultBranchRef.target.history
+
           return (
-            <ul>
-              {data.repository.defaultBranchRef.target.history.edges.map(
-                ({ node }) => {
-                  const timeAgo = formatDistance(
-                    new Date(node.committedDate),
-                    new Date()
-                  )
-                  return (
-                    <li key={node.oid}>
-                      <Link to={`/${owner}/${repo}/blob/${node.oid}/${path}`}>
-                        {node.message} - {timeAgo}
-                      </Link>
-                    </li>
-                  )
-                }
-              )}
+            <ul className={css.list}>
+              {edges.map(({ node }) => {
+                const timeAgo = formatDistance(
+                  new Date(node.committedDate),
+                  new Date()
+                )
+                return (
+                  <li
+                    key={node.oid}
+                    className={cn(css.item, {
+                      [css.active]: node.oid === gitRef,
+                    })}
+                  >
+                    <Link to={`/${owner}/${repo}/blob/${node.oid}/${path}`}>
+                      <div className={css.message}>{node.message}</div>
+                      <div className={css.timeAgo}>{timeAgo}</div>
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           )
         }}
       </Query>
     </div>
   )
-}
+})
 
 export { FileHistory }
