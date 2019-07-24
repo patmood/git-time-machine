@@ -18,15 +18,13 @@ const historyQuery = gql`
         target {
           ... on Commit {
             history(first: 10, path: $path) {
-              edges {
-                node {
-                  ... on Commit {
-                    oid
-                    commitResourcePath
-                    message
-                    changedFiles
-                    committedDate
-                  }
+              nodes {
+                ... on Commit {
+                  oid
+                  commitResourcePath
+                  messageHeadline
+                  changedFiles
+                  committedDate
                 }
               }
             }
@@ -39,22 +37,22 @@ const historyQuery = gql`
 
 const FileHistory = withRouter(function FileHistory(props) {
   const { owner, repo, gitRef, path } = props
-  const [edges, setEdges] = useState([])
+  const [nodes, setNodes] = useState([])
 
   function handleKeydown(e) {
     if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return
 
-    const activeIndex = edges.findIndex(edge => edge.node.oid === gitRef)
-    let newEdge
+    const activeIndex = nodes.findIndex(n => n.oid === gitRef)
+    let newNode
     if (e.key === 'ArrowLeft') {
-      newEdge = edges[activeIndex - 1]
+      newNode = nodes[activeIndex - 1]
     } else if (e.key === 'ArrowRight') {
-      newEdge = edges[activeIndex + 1]
+      newNode = nodes[activeIndex + 1]
     }
 
-    if (!newEdge) return
+    if (!newNode) return
 
-    props.history.push(`/${owner}/${repo}/blob/${newEdge.node.oid}/${path}`)
+    props.history.push(`/${owner}/${repo}/blob/${newNode.oid}/${path}`)
   }
 
   useEffect(() => {
@@ -70,11 +68,11 @@ const FileHistory = withRouter(function FileHistory(props) {
           if (loading) return <Loading />
           if (error) return <Error error={error} />
 
-          const { edges } = data.repository.defaultBranchRef.target.history
-          setEdges(edges)
+          const { nodes } = data.repository.defaultBranchRef.target.history
+          setNodes(nodes)
           return (
             <ul className={css.list}>
-              {edges.map(({ node }) => {
+              {nodes.map(node => {
                 const timeAgo = formatDistance(
                   new Date(node.committedDate),
                   new Date()
@@ -87,7 +85,9 @@ const FileHistory = withRouter(function FileHistory(props) {
                     })}
                   >
                     <Link to={`/${owner}/${repo}/blob/${node.oid}/${path}`}>
-                      <div className={css.message}>{node.message}</div>
+                      <div className={css.messageHeadline}>
+                        {node.messageHeadline}
+                      </div>
                       <div className={css.timeAgo}>{timeAgo}</div>
                     </Link>
                   </li>

@@ -16,7 +16,7 @@
   background-color: var(--yellow);
 }
 
-.message {
+.messageHeadline {
   max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
